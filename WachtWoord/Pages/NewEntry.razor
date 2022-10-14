@@ -42,9 +42,6 @@
     }
 
     void SubmitOnClick(){
-        using var db = new WachtContext("blogging.db");
-        db.Entries.Add(new Entry { Username = Username, Password = Password});
-        db.SaveChanges();
         NavigationManager.NavigateTo("/");
     }
 
