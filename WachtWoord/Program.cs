@@ -1,5 +1,3 @@
-using WachtWoord.SQLite;
-
 namespace WachtWoord
 {
     internal static class Program
