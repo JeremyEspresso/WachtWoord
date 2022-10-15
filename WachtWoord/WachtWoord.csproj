@@ -11,14 +11,6 @@
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.WindowsForms" Version="6.0.541" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="6.0.10" />
-    <PackageReference Include="sqlite-net-sqlcipher" Version="1.8.116" />
-    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.1.2" />
   </ItemGroup>
 
 </Project>
