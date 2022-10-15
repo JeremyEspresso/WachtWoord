@@ -1,4 +1,6 @@
 ﻿@page "/newentry"
+
+
 @inject NavigationManager NavigationManager
 
 <form>
@@ -25,7 +27,7 @@
 </form>
 
 <div class="mt-2">
-    <button class="btn btn-primary" type="submit">Ok</button>
+    <button class="btn btn-primary" type="submit" @onclick="SubmitOnClick">Ok</button>
     <button class="btn btn-primary" type="submit" @onclick="CancelOnClick">Cancel</button>
 </div>
 
@@ -36,12 +38,15 @@
     private string Password { get; set; }
     private string Notes { get; set; }
 
+    private WachtContext _context = new WachtContext();
+
     void CancelOnClick(){
         NavigationManager.NavigateTo("/");
     }
 
     void SubmitOnClick(){
-        
+
+        NavigationManager.NavigateTo("/");
     }
 
 }
