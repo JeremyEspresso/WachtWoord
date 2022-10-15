@@ -1,3 +1,4 @@
+using WachtWoord.Models;
 using WachtWoord.SQLite;
 
 namespace WachtWoord
@@ -14,7 +15,7 @@ namespace WachtWoord
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run((System.Windows.Forms.Form)new Window());
+            Application.Run(new Window());
         }
     }
 }
