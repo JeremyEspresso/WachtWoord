@@ -32,11 +32,14 @@
         };
     }
 
+    //This function gets called in the Tbody.
+    //It's purpose is getting the entries from the database and displaying them in the table.
     private MarkupString display_all_entries()
     {
         var sb = new StringBuilder();
         var color = "";
         int i = 1;
+        //TODO: Call EntryService class to get entries from database.
         foreach (var entry in entries)
         {
             //If statement is needed for striped rows. Every 2nd row gets a different color.
