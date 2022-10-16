@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WachtWoord.Models
+namespace WachtWoord.Models.Interfaces
 {
     internal interface IEntryService
     {
@@ -12,6 +12,6 @@ namespace WachtWoord.Models
         public void DeleteEntry(Entry entry);
         public void UpdateEntry(Entry entry);
         public List<Entry> GetEntries();
-        
+
     }
 }

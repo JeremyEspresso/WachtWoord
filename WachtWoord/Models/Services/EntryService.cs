@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WachtWoord.Models.Interfaces;
 
-namespace WachtWoord.Models
+namespace WachtWoord.Models.Services
 {
     internal class EntryService : IEntryService
     {
