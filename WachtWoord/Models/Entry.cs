@@ -1,6 +1,6 @@
 ﻿namespace WachtWoord.Models
 {
-    internal class Entry
+    public class Entry
     {
         public int Id { get; set; }
         public string Username { get; set; }
