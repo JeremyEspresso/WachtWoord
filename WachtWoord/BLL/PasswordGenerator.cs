@@ -14,10 +14,24 @@ namespace WachtWoord.BLL
         private const string numbers = "0123456789";
         private const string specials = "!@#$%^&*()_+-=[]{}|;':,./<>?`~";
         private int length { get; set; }
+        private bool useLower { get; set; }
+        private bool useUpper { get; set; }
+        private bool useNumbers { get; set; }
+        private bool useSpecials { get; set; }
 
 
-        public PasswordGenerator(int length)
+
+        public PasswordGenerator(int length,
+                                 bool useLower,
+                                 bool useUpper,
+                                 bool useNumbers,
+                                 bool useSpecials)
         {
+            this.length = length;
+            this.useLower = useLower;
+            this.useUpper = useUpper;
+            this.useNumbers = useNumbers;
+            this.useSpecials = useSpecials;
             this.length = length;
         }
 
@@ -30,14 +44,10 @@ namespace WachtWoord.BLL
         {
             StringBuilder chars = new();
             //Placeholders, these will be replaced by values from config file.
-            bool lowerChecked = true;
-            bool upperChecked = true;
-            bool specialsChecked = true;
-            bool numbersChecked = true;
-            if (lowerChecked) chars.Append(lower);
-            if (upperChecked) chars.Append(upper);
-            if (specialsChecked) chars.Append(numbers);
-            if (numbersChecked) chars.Append(specials);
+            if (useLower) chars.Append(lower);
+            if (useUpper) chars.Append(upper);
+            if (useNumbers) chars.Append(numbers);
+            if (useSpecials) chars.Append(specials);
             
             Random random = new();
             //Fisher-Yates shuffle on string
