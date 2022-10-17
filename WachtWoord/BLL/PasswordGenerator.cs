@@ -9,7 +9,6 @@ namespace WachtWoord.BLL
 {
     internal class PasswordGenerator : IPasswordGenerator
     {
-        private readonly Random _random = new();
         private const string lower = "abcdefghijklmnopqrstuvwxyz";
         private const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string numbers = "0123456789";
@@ -39,16 +38,18 @@ namespace WachtWoord.BLL
             if (upperChecked) chars.Append(upper);
             if (specialsChecked) chars.Append(numbers);
             if (numbersChecked) chars.Append(specials);
-
+            
+            Random random = new();
             //Fisher-Yates shuffle on string
             int n = chars.Length;
             for(int i = 0; i < (n - 1); i++)
             {
-                int r = i + _random.Next(n - i);
+                int r = i + random.Next(n - i);
                 (chars[i], chars[r]) = (chars[r], chars[i]);
             }
             return chars.ToString();
         }
+        
         //<summary>
         //Generates a password
         //</summary>
@@ -57,17 +58,19 @@ namespace WachtWoord.BLL
             StringBuilder password = new();
             string chars = GenerateCharacters();
 
-            //Prev and next are there to prevent having the same character in a sequence
-            int prev = -1;
-            int next = _random.Next(0, chars.Length);
-            for (int i = 0; i < length; i++)
+            //use RandomNumberGenerator
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                if (next == prev) next = _random.Next(0, chars.Length);
-                password.Append(chars[next]);
-                prev = next;
+                byte[] oneByte = new byte[1];
+                for (int i = 0; i < length; i++)
+                {
+                    rng.GetBytes(oneByte);
+                    byte b = oneByte[0];
+                    password.Append(chars[b % (chars.Length)]);
+                }
             }
+
             return password.ToString();
         }
-
     }
 }
