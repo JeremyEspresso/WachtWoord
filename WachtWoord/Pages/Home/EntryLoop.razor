@@ -1,0 +1,33 @@
+﻿@for (int i = 0; i < entries.Count; i++)
+{
+    <EntryRow entry="@entries[i]" i="@i"/>
+}
+
+@code {
+    private List<Entry> entries = new List<Entry>();
+    private int i = 0;
+    /*
+    TO DO:
+    - Call EntryService to get all entries
+    */
+    
+    protected override void OnInitialized()
+    {
+        entries = GetEntries();
+    }
+
+    private List<Entry> GetEntries()
+    {
+        return new List<Entry>
+        {
+            new Entry { Id = 1, Password = "A", Username = "AAAAAAAAAAAAAAAAAAAAAAAAAAAA", Title ="Facebook", URL = "facebook.com"},
+            new Entry { Id = 2, Password = "C", Username = "B"},
+            new Entry { Id = 3, Password = "D", Username = "B"},
+            new Entry { Id = 4, Password = "E", Username = "B"},
+            new Entry { Id = 5, Password = "F", Username = "B"},
+            new Entry { Id = 6, Password = "G", Username = "B"},
+        };
+    }
+   
+}
+
