@@ -37,15 +37,16 @@
             this.blazorWebView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.blazorWebView1.Location = new System.Drawing.Point(0, 0);
             this.blazorWebView1.Name = "blazorWebView1";
-            this.blazorWebView1.Size = new System.Drawing.Size(784, 561);
+            this.blazorWebView1.Size = new System.Drawing.Size(1008, 729);
             this.blazorWebView1.TabIndex = 0;
             this.blazorWebView1.Text = "blazorWebView1";
+            this.blazorWebView1.UseWaitCursor = true;
             // 
             // Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.blazorWebView1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
