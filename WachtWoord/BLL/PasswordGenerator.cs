@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WachtWoord.BLL
 {
-    internal class PasswordGenerator : IPasswordGenerator
+    public class PasswordGenerator : IPasswordGenerator
     {
         private const string lower = "abcdefghijklmnopqrstuvwxyz";
         private const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
