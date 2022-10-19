@@ -6,8 +6,7 @@ namespace WachtWoord.BLL
 {
     public class Settings
     {
-        //public static readonly string path = Environment.CurrentDirectory + "settings.json";
-        public static readonly string path = "C:\\Users\\duane\\source\\repos\\WachtWoord\\WachtWoord\\settings.json";
+        public static readonly string path = Environment.CurrentDirectory + "settings.json";
         public void Create()
         {
             if (File.Exists(path)) return;
