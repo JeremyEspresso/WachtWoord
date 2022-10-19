@@ -4,37 +4,17 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using WachtWoord.Models;
 
 namespace WachtWoord.BLL
 {
     public class PasswordGenerator : IPasswordGenerator
     {
-        private const string lower = "abcdefghijklmnopqrstuvwxyz";
-        private const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const string numbers = "0123456789";
-        private const string specials = "!@#$%^&*()_+-=[]{}|;':,./<>?`~";
-        private int length { get; set; }
-        private bool useLower { get; set; }
-        private bool useUpper { get; set; }
-        private bool useNumbers { get; set; }
-        private bool useSpecials { get; set; }
-
-
-
-        public PasswordGenerator(int length,
-                                 bool useLower,
-                                 bool useUpper,
-                                 bool useNumbers,
-                                 bool useSpecials)
+        UserSettings UserSettings { get; set; }
+        public PasswordGenerator()
         {
-            this.length = length;
-            this.useLower = useLower;
-            this.useUpper = useUpper;
-            this.useNumbers = useNumbers;
-            this.useSpecials = useSpecials;
-            this.length = length;
+            this.UserSettings = Settings.Read() ?? new UserSettings();
         }
-
         // <summary>
         // Function checks the password generator requirements set by the user
         // Creates a string of chars based on the requirements
@@ -42,12 +22,13 @@ namespace WachtWoord.BLL
         // </summary>
         public string GenerateCharacters()
         {
+
             StringBuilder chars = new();
-            //Placeholders, these will be replaced by values from config file.
-            if (useLower) chars.Append(lower);
-            if (useUpper) chars.Append(upper);
-            if (useNumbers) chars.Append(numbers);
-            if (useSpecials) chars.Append(specials);
+
+            if (UserSettings.useLower) chars.Append(UserSettings.lower);
+            if (UserSettings.useUpper) chars.Append(UserSettings.upper);
+            if (UserSettings.useNumbers) chars.Append(UserSettings.numbers);
+            if (UserSettings.useSpecials) chars.Append(UserSettings.specials);
             
             Random random = new();
             //Fisher-Yates shuffle on string
@@ -68,11 +49,10 @@ namespace WachtWoord.BLL
             StringBuilder password = new();
             string chars = GenerateCharacters();
 
-            //use RandomNumberGenerator
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
                 byte[] oneByte = new byte[1];
-                for (int i = 0; i < length; i++)
+                for (int i = 0; i < UserSettings.length; i++)
                 {
                     rng.GetBytes(oneByte);
                     byte b = oneByte[0];
