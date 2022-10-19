@@ -1,0 +1,11 @@
+{
+  "length": 32,
+  "lower": "abcdefghijklmnopqrstuvwxyz",
+  "upper": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "numbers": "!@#$%^&*()_+-=",
+  "specials": "0123456789",
+  "useUpper": true,
+  "useLower": true,
+  "useNumbers": true,
+  "useSpecials": true
+}
