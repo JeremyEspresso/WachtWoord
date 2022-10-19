@@ -1,16 +1,12 @@
 ﻿@for (int i = 0; i < entries.Count; i++)
 {
-    <EntryRow entry="@entries[i]" i="@i" OnEntrySelected="SelectedEntryUpdate" />
-}
-
-@if(selectedEntry != null){
-    @selectedEntry.Id
+    <EntryRow entry="@entries[i]" i="@i" OnEntrySelected="SelectedEntryUpdate" isSelected="@(selectedEntry == entries[i])" />
 }
 
 @code {
     private List<Entry> entries = new List<Entry>();
     private int i = 0;
-    private Entry selectedEntry;
+    private Entry? selectedEntry;
 
     /*
     TO DO:
