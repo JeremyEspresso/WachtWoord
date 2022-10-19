@@ -7,15 +7,13 @@ namespace Tests
     {
         /*
          * Result of characters is not NULL
-         * Result of characters is a string
          */
         [Fact]
         public void CharactersAreCreated()
         {
             PasswordGenerator gen = new(1, true, true, true, true);
             var result = gen.GenerateCharacters();
-            Assert.NotNull(result);
-            Assert.True(result.GetType() == typeof(string));
+            Assert.False(string.IsNullOrEmpty(result));
         }
 
         /*

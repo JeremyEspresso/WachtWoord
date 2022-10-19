@@ -1,0 +1,26 @@
+﻿<tr class="@((i % 2 == 0) ? "bg-neutral-300" : "bg-neutral-200") 
+           @((isSelected) ? "bg-neutral-400" : "")
+           border-b border-gray-700"
+    @onclick="(args) => SelectedEntryUpdate(args, entry)">
+    <th class='py-4 px-6 font-medium whitespace-nowrap'>@entry.Id</th>
+    <td>@entry.Title</td>
+    <td>@entry.Username</td>
+    <td>@entry.URL</td>
+</tr>
+
+@code {
+    [Parameter]
+    public bool isSelected { get; set; }
+    [Parameter]
+    public EventCallback<Entry> OnEntrySelected { get; set; }
+    [Parameter]
+    public Entry entry { get; set; }
+    [Parameter]
+    public int i { get; set; }
+
+    private async Task SelectedEntryUpdate(MouseEventArgs e, Entry entry)
+    {
+        await OnEntrySelected.InvokeAsync(entry);
+    }
+}
+
