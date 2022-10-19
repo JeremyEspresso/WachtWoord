@@ -5,7 +5,6 @@
 
 @code {
     private List<Entry> entries = new List<Entry>();
-    private int i = 0;
     private Entry? selectedEntry;
 
     /*
@@ -30,11 +29,8 @@
             new Entry { Id = 6, Password = "G", Username = "B"},
         };
     }
-    
-    private async void SelectedEntryUpdate(Entry entry)
-    {
-        selectedEntry = entry;
-    }
+
+    private void SelectedEntryUpdate(Entry entry) => selectedEntry = entry;
 
 }
 
