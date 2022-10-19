@@ -4,10 +4,10 @@ using WachtWoord.Models;
 
 namespace WachtWoord.BLL
 {
-    public class Settings
+    public static class Settings
     {
         public static readonly string path = Environment.CurrentDirectory + "settings.json";
-        public void Create()
+        public static void Create()
         {
             if (File.Exists(path)) return;
             using (FileStream fs = File.Create(path))
@@ -17,20 +17,20 @@ namespace WachtWoord.BLL
                 fs.Write(info, 0, info.Length);
             };
         }
-        public void Update(UserSettings userSettings)
+        public static void Update(UserSettings userSettings)
         {
             string JSONres = JsonConvert.SerializeObject(userSettings, Formatting.Indented);
             File.WriteAllText(path, JSONres);
         }
 
-        public void Delete()
+        public static void Delete()
         {
-
-            File.Delete(path);
+            if (File.Exists(path)) File.Delete(path);
         }
-
-        public UserSettings Read()
+        
+        public static UserSettings? Read()
         {
+            if (!File.Exists(path)) return null;
             string JSONres = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<UserSettings>(JSONres);
         }
