@@ -8,7 +8,10 @@ namespace Tests
         /*
          * Result of characters is not NULL
          */
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         /*
         [Fact]
         public void CharactersAreCreated()
@@ -22,8 +25,19 @@ namespace Tests
         /*
          * Result of characters meets the users requirements
         */
+<<<<<<< Updated upstream
         [Fact]
         public void CharactersContainsRequirements()
+=======
+        /*
+        [Theory]
+        [InlineData("$")]
+        [InlineData("8")]
+        [InlineData("A")]
+        [InlineData("a")]
+
+        public void CharactersContainsRequirements(string character)
+>>>>>>> Stashed changes
         {
             PasswordGenerator gen = new();
             var result = gen.GenerateCharacters();
@@ -38,12 +52,18 @@ namespace Tests
         [InlineData(13)]
         [InlineData(102)]
         [InlineData(107)]
+        
         public void PasswordLength(int length)
         {
-            PasswordGenerator gen = new(length, true, true, true, true);
+            PasswordGenerator gen = new(length);
             var result = gen.GeneratePassword();
             Assert.Equal(length, result.Length);
         }
+<<<<<<< Updated upstream
         */
+=======
+        
+
+>>>>>>> Stashed changes
     }
 }
