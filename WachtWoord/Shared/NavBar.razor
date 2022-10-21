@@ -1,16 +1,31 @@
-﻿<aside class="w-20 fixed" aria-label="Sidebar">
-    <div class="h-screen overflow-hidden py-4 px-3 bg-neutral-200 drop-shadow-sm">
+﻿<div class="w-28 fixed font-sans font-semibold tracking-tight" aria-label="Sidebar">
+    <div class="h-screen overflow-hidden py-4 px-3 bg-neutral-900 shadow-lg shadow-neutral-900 flex text-center">
         <ul class="space-y-2">
             <li>
-                <a href="/" class="flex items-center p-2 rounded-lg hover:bg-white/80 bg-neutral-300">
-                    <img class="w-20 h-auto" src="/img/home.png" title="Home" />
+                <a href="/">
+                    <div class="p-2 bg-violet-600 shadow-sm shadow-neutral-800 rounded-sm hover:bg-violet-500">
+                        <span class="text-white">HOME</span>
+                    </div>
                 </a>
             </li>
             <li>
-                <a href="/settings" class="flex items-center p-2 rounded-lg hover:bg-white/80 bg-neutral-300">
-                    <img class="w-20 h-auto" src="/img/settings.png" title="Settings"/>
+                <a href="/settings">
+                    <div class="p-2 bg-violet-600 shadow-sm shadow-neutral-800 rounded-sm hover:bg-violet-500">
+                        <span class="text-white">SETTINGS</span>
+                    </div>
                 </a>
+            </li>
+            <li tabindex="-1" class="absolute m-4 inset-x-0 bottom-3">
+                <div @onclick="OnQuitClick" class="bg-red-600 shadow-sm shadow-neutral-800 rounded-sm hover:bg-red-500 hover:cursor-pointer">
+                    <span class="text-white text-sm">QUIT</span>
+                </div>
             </li>
         </ul>
     </div>
-</aside>
+</div>
+
+@code {
+    private void OnQuitClick(){
+        Application.Exit();
+    }
+}
