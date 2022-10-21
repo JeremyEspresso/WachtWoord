@@ -11,9 +11,11 @@ namespace WachtWoord.BLL
     public class PasswordGenerator : IPasswordGenerator
     {
         UserSettings UserSettings { get; set; }
-        public PasswordGenerator()
+        private int Length { get; set; }
+        public PasswordGenerator(int length)
         {
             this.UserSettings = Settings.Read() ?? new UserSettings();
+            this.Length = length;
         }
         // <summary>
         // Function checks the password generator requirements set by the user
@@ -22,7 +24,6 @@ namespace WachtWoord.BLL
         // </summary>
         public string GenerateCharacters()
         {
-
             StringBuilder chars = new();
 
             if (UserSettings.useLower) chars.Append(UserSettings.lower);
@@ -51,12 +52,19 @@ namespace WachtWoord.BLL
 
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                byte[] oneByte = new byte[1];
-                for (int i = 0; i < UserSettings.length; i++)
+                byte[] prev = new byte[1];
+                byte[] next = new byte[1];
+                rng.GetBytes(prev);
+                for (int i = 0; i < Length; i++)
                 {
-                    rng.GetBytes(oneByte);
-                    byte b = oneByte[0];
+                    rng.GetBytes(next);
+                    while (prev[0] == next[0])
+                    {
+                        rng.GetBytes(next);
+                    }
+                    byte b = next[0];
                     password.Append(chars[b % (chars.Length)]);
+                    prev[0] = next[0];
                 }
             }
 
