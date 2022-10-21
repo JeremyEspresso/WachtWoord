@@ -51,7 +51,7 @@ namespace Tests
         {
             Settings.Update(new UserSettings() { lower = "test" });
             UserSettings? userSettings = Settings.Read();
-            Assert.Equal("test", userSettings.lower);
+            Assert.Equal("test", userSettings?.lower);
         }
     }
 }
