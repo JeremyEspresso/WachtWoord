@@ -12,9 +12,15 @@ namespace WachtWoord.BLL
     {
         UserSettings UserSettings { get; set; }
         private int Length { get; set; }
+        public PasswordGenerator(int length, UserSettings userSettings)
+        {
+            UserSettings = userSettings;
+            this.Length = length;
+        }
+
         public PasswordGenerator(int length)
         {
-            this.UserSettings = Settings.Read() ?? new UserSettings();
+            UserSettings = new UserSettings();
             this.Length = length;
         }
         // <summary>
@@ -26,13 +32,14 @@ namespace WachtWoord.BLL
         {
             StringBuilder chars = new();
 
+            //Get the chars from the settings based on the requirements set by user.
             if (UserSettings.useLower) chars.Append(UserSettings.lower);
             if (UserSettings.useUpper) chars.Append(UserSettings.upper);
             if (UserSettings.useNumbers) chars.Append(UserSettings.numbers);
             if (UserSettings.useSpecials) chars.Append(UserSettings.specials);
-            
+
+            //Fisher-Yates shuffle
             Random random = new();
-            //Fisher-Yates shuffle on string
             int n = chars.Length;
             for(int i = 0; i < (n - 1); i++)
             {
@@ -50,22 +57,18 @@ namespace WachtWoord.BLL
             StringBuilder password = new();
             string chars = GenerateCharacters();
 
-            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            //Generate a random password based on the chars
+            //Random number generator no sequence
+
+            int prev, next;
+            prev = -1;
+            for(int i = 0; i < Length; i++)
             {
-                byte[] prev = new byte[1];
-                byte[] next = new byte[1];
-                rng.GetBytes(prev);
-                for (int i = 0; i < Length; i++)
-                {
-                    rng.GetBytes(next);
-                    while (prev[0] == next[0])
-                    {
-                        rng.GetBytes(next);
-                    }
-                    byte b = next[0];
-                    password.Append(chars[b % (chars.Length)]);
-                    prev[0] = next[0];
-                }
+                next = RandomNumberGenerator.GetInt32(0, chars.Length - 1);
+                while (next == prev) next = RandomNumberGenerator.GetInt32(0, chars.Length - 1);
+                password.Append(chars[next % (chars.Length)]);
+                prev = next;
+
             }
 
             return password.ToString();

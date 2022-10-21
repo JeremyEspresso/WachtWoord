@@ -6,64 +6,66 @@ namespace Tests
     public class PasswordGeneratorTest
     {
         /*
-         * Result of characters is not NULL
+         * Tests with default UserSettings
          */
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
-        /*
+            /*
+             * Generate Characters Tests
+             */
         [Fact]
-        public void CharactersAreCreated()
+        public void GenerateCharactersDefaultSettings()
         {
-            PasswordGenerator gen = new(1, true, true, true, true);
-            var result = gen.GenerateCharacters();
-            Assert.False(string.IsNullOrEmpty(result));
+            var passwordGenerator = new PasswordGenerator(32);
+            var result = passwordGenerator.GenerateCharacters();
+            Assert.NotNull(result);
         }
-        */
 
-        /*
-         * Result of characters meets the users requirements
-        */
-<<<<<<< Updated upstream
-        [Fact]
-        public void CharactersContainsRequirements()
-=======
-        /*
         [Theory]
+        [InlineData("b")]
+        [InlineData("F")]
+        [InlineData("2")]
         [InlineData("$")]
-        [InlineData("8")]
-        [InlineData("A")]
-        [InlineData("a")]
-
-        public void CharactersContainsRequirements(string character)
->>>>>>> Stashed changes
+        public void GenerateCharactersDefaultSettingsContains(string expected)
         {
-            PasswordGenerator gen = new();
-            var result = gen.GenerateCharacters();
-            Assert.Contains("$", result);
+            var passwordGenerator = new PasswordGenerator(32);
+            var result = passwordGenerator.GenerateCharacters();
+            Assert.Contains(expected, result);
         }
 
-        /*
-         * Password length should be the exact length as the length parameter
-        
         [Theory]
-        [InlineData(83)]
-        [InlineData(13)]
-        [InlineData(102)]
-        [InlineData(107)]
-        
-        public void PasswordLength(int length)
+        [InlineData("abcdefghijklmnopqrstuvwxyz")]
+        [InlineData("ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
+        [InlineData("0123456789")]
+        [InlineData("!@#$%^&*()_+-=[]{}|;':,./<>?`~")]
+        public void GenerateCharactersDefaultSettingsIsShuffled(string expected)
         {
-            PasswordGenerator gen = new(length);
-            var result = gen.GeneratePassword();
-            Assert.Equal(length, result.Length);
+            var passwordGenerator = new PasswordGenerator(32);
+            var result = passwordGenerator.GenerateCharacters();
+            Assert.DoesNotContain(expected, result);
         }
-<<<<<<< Updated upstream
-        */
-=======
-        
 
->>>>>>> Stashed changes
+        [Fact]
+        public void GeneratePasswordDefaultSettings()
+        {
+            var passwordGenerator = new PasswordGenerator(32);
+            var result = passwordGenerator.GenerateCharacters();
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void GeneratePasswordNoSequence()
+        {
+            var passwordGenerator = new PasswordGenerator(82);
+            var result = passwordGenerator.GeneratePassword();
+            bool containsSequence = false;
+            
+            for(int i = 0; i < result.Length - 1; i++)
+            {
+                if (result[i] == result[i + 1]) containsSequence = true;
+            }
+            
+            Assert.False(containsSequence);
+        }
+        
     }
 }
