@@ -1,8 +1,8 @@
-﻿<div class="overflow-hidden flex flex-wrap ">
+﻿
     @foreach(Entry entry in favorites){
         <FavoriteCard entry="@entry" />
     }
-</div>
+
 
 @code {
     private List<Entry> favorites = new List<Entry>();
@@ -22,11 +22,11 @@
     {
         return new List<Entry>
         {
-            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
-            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
-            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
-            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
-            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
+            new Entry { Id = 1, Password = "A", Username = "foo@bar.foobar", Title ="Facebook", URL = "facebook.com"},
+            new Entry { Id = 1, Password = "A", Username = "foo@bar.foobar", Title ="Google", URL = "facebook.com"},
+            new Entry { Id = 1, Password = "A", Username = "foo@bar.foobar", Title ="GitHub", URL = "facebook.com"},
+            new Entry { Id = 1, Password = "A", Username = "foo@bar.foobar", Title ="School", URL = "facebook.com"},
+            new Entry { Id = 1, Password = "A", Username = "foo@bar.foobar", Title ="Work", URL = "facebook.com"},
         };
     }
 
