@@ -1,31 +1,30 @@
-﻿<div class="w-28 fixed font-sans font-semibold tracking-tight" aria-label="Sidebar">
-    <div class="h-screen overflow-hidden py-4 px-3 bg-neutral-900 shadow-lg shadow-neutral-900 flex text-center">
-        <ul class="space-y-2">
-            <li>
-                <a href="/">
-                    <div class="p-2 bg-violet-600 shadow-sm shadow-neutral-800 rounded-sm hover:bg-violet-500">
-                        <span class="text-white">HOME</span>
-                    </div>
+﻿<div class="w-35 fixed font-sans font-semibold tracking-tight uppercase " aria-label="Sidebar">
+    <div class="h-screen overflow-hidden py-4 px-3 bg-zinc-100 flex items-center drop-shadow-sm rounded-r-md">
+        <ul class="space-y-1">
+            <li class="transition ease-in-out duration-400 underline decoration-transparent hover:decoration-pink-500">
+                <a href="/" @onclick='() => Active = "dashboard"' class="@(Active== "dashboard" ? "text-pink-500" : "text-black")">
+                    dashboard
                 </a>
             </li>
-            <li>
-                <a href="/settings">
-                    <div class="p-2 bg-violet-600 shadow-sm shadow-neutral-800 rounded-sm hover:bg-violet-500">
-                        <span class="text-white">SETTINGS</span>
-                    </div>
+            <li class="transition ease-in-out duration-400 underline decoration-transparent hover:decoration-pink-500">
+                <a href="/archive" @onclick='() => Active = "passwords"' class="@(Active== "passwords" ? "text-pink-500" : "text-black")">
+                    passwords
                 </a>
             </li>
-            <li tabindex="-1" class="absolute m-4 inset-x-0 bottom-3">
-                <div @onclick="OnQuitClick" class="bg-red-600 shadow-sm shadow-neutral-800 rounded-sm hover:bg-red-500 hover:cursor-pointer">
-                    <span class="text-white text-sm">QUIT</span>
-                </div>
+            <li class="transition ease-in-out duration-400 underline decoration-transparent hover:decoration-pink-500">
+                <a href="/archive" @onclick='() => Active = "archive"' class="@(Active== "archive" ? "text-pink-500" : "text-black")">
+                    archive
+                </a>
+            </li>
+            <li class="transition ease-in-out duration-400 underline decoration-transparent hover:decoration-pink-500">
+                <a href="/settings" @onclick='() => Active = "settings"' class="@(Active == "settings" ? "text-pink-500" : "text-black")">
+                    settings
+                </a>
             </li>
         </ul>
     </div>
 </div>
 
 @code {
-    private void OnQuitClick(){
-        Application.Exit();
-    }
+    private string Active = "dashboard";
 }

@@ -1,0 +1,34 @@
+﻿<div class="overflow-hidden flex flex-wrap ">
+    @foreach(Entry entry in favorites){
+        <FavoriteCard entry="@entry" />
+    }
+</div>
+
+@code {
+    private List<Entry> favorites = new List<Entry>();
+    private Entry? selectedEntry;
+
+    /*
+    TO DO:
+    - Call EntryService to get all entries
+    */
+
+    protected override void OnInitialized()
+    {
+        favorites = GetEntries();
+    }
+
+    private List<Entry> GetEntries()
+    {
+        return new List<Entry>
+        {
+            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
+            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
+            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
+            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
+            new Entry { Id = 1, Password = "A", Username = "luka@tim.co.uk", Title ="XD", URL = "facebook.com"},
+        };
+    }
+
+    private void SelectedEntryUpdate(Entry entry) => selectedEntry = entry;
+}
