@@ -3,7 +3,7 @@ using WachtWoord.Models;
 
 namespace WachtWoord.SQLite
 {
-    internal class WachtContex
+    public class Database : DbContext
     {
 
     }
