@@ -3,33 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WachtWoord.Models.Interfaces;
 
 namespace WachtWoord.Models.Services
 {
-    public class EntryService : IEntryService
+    public class FavoriteService
     {
-        public void AddEntry(Entry entry)
+        public void AddFavorite(Favorite favorite)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteEntry(Entry entry)
+        public void DeleteFavorite(Favorite favorite)
         {
             throw new NotImplementedException();
         }
 
-        public List<Entry> GetEntries()
+        public List<Favorite> GetFavorites()
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateEntry(Entry entry)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetEntryCount()
+        public void UpdateFavorite(Favorite favorite)
         {
             throw new NotImplementedException();
         }
