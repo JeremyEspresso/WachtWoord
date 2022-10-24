@@ -42,7 +42,7 @@
 
     protected override void OnInitialized()
     {
-        if (DatabaseService.DatabaseExists())
+        if (DatabaseService.Exists())
         {
             NavigationManager.NavigateTo("/login");
         }
@@ -52,7 +52,7 @@
     {
         if (Password == RepeatPassword)
         {
-            if (DatabaseService.CreateDatabase(Password))
+            if (DatabaseService.Create(Password))
             {
                 NavigationManager.NavigateTo("/login");
             }
