@@ -17,6 +17,5 @@ namespace WachtWoord.Models
         public bool useLower = true;
         public bool useNumbers = true;
         public bool useSpecials = true;
-        public int length = 32;
     }
 }

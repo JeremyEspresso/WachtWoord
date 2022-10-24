@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace WachtWoord.Models.Interfaces
 {
-    interface IEntryService
+    interface IFavoriteService
     {
-        public void AddEntry(Entry entry);
-        public void DeleteEntry(Entry entry);
-        public void UpdateEntry(Entry entry);
+        public void AddEntry(Favorite favorite);
+        public void DeleteEntry(Favorite favorite);
+        public void UpdateEntry(Favorite favorite);
         public List<Entry> GetEntries();
-        public int GetEntryCount();
     }
+
 }
