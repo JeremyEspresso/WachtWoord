@@ -39,7 +39,7 @@
 
     void OnLoginClick()
     {
-        if (DatabaseService.DatabaseExists())
+        if (DatabaseService.Exists())
         {
             if (DatabaseService.Login(Password))
             {

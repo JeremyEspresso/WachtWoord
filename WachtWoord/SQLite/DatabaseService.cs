@@ -4,7 +4,7 @@ namespace WachtWoord.SQLite
 {
     public class DatabaseService
     {
-        public static bool DatabaseExists()
+        public static bool Exists()
         {
             return File.Exists(Database.DEFAULTDBFILE);
         }
@@ -23,7 +23,7 @@ namespace WachtWoord.SQLite
             }
         }
         
-        public static bool CreateDatabase(string password)
+        public static bool Create(string password)
         {
             Database db = new(password);
             return db.Database.EnsureCreated();
