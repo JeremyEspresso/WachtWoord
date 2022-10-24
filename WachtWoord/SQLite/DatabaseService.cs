@@ -1,15 +1,13 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace WachtWoord.SQLite
 {
     public class DatabaseService
     {
+        public static bool DatabaseExists()
+        {
+            return File.Exists(Database.DEFAULTDBFILE);
+        }
         public static bool Login(string password)
         {
             try
@@ -17,23 +15,23 @@ namespace WachtWoord.SQLite
                 using var db = new Database(password);
                 db.Database.EnsureCreated();
                 return true;
-            } catch
+            }
+            catch
             {
                 return false;
             }
         }
         public static void CreateDatabase(string password)
         {
-            Database db = new Database(password);
+            Database db = new(password);
             db.Database.EnsureCreated();
         }
 
-        public static void ChangePassword(string password)
+        public static void ChangePassword(string newPassword)
         {
-            using Database db = new();
-            db.Database.ExecuteSqlRaw($"PRAGMA key = '{password}';");
+            Database db = new();
+            var query = @"PRAGMA rekey = '" + newPassword + "';";
+            db.Database.ExecuteSqlRaw(query);
         }
-        
-        
     }
 }
