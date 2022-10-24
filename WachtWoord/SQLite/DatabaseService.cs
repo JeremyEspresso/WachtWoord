@@ -8,6 +8,7 @@ namespace WachtWoord.SQLite
         {
             return File.Exists(Database.DEFAULTDBFILE);
         }
+        
         public static bool Login(string password)
         {
             try
@@ -21,10 +22,11 @@ namespace WachtWoord.SQLite
                 return false;
             }
         }
-        public static void CreateDatabase(string password)
+        
+        public static bool CreateDatabase(string password)
         {
             Database db = new(password);
-            db.Database.EnsureCreated();
+            return db.Database.EnsureCreated();
         }
 
         public static void ChangePassword(string newPassword)
