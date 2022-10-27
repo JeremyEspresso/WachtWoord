@@ -59,7 +59,6 @@ namespace WachtWoord.BLL
 
             //Generate a random password based on the chars
             //Random number generator no sequence
-
             int prev, next;
             prev = -1;
             for(int i = 0; i < Length; i++)
