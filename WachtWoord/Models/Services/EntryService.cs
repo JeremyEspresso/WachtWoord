@@ -4,34 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WachtWoord.Models.Interfaces;
+using WachtWoord.SQLite;
 
 namespace WachtWoord.Models.Services
 {
     public class EntryService : IEntryService
     {
-        public void AddEntry(Entry entry)
+        private readonly Database _db = new();
+        
+        public async void AddEntry(Entry entry)
         {
-            throw new NotImplementedException();
+            _db.Entries.Add(entry);
+            await _db.SaveChangesAsync();
         }
 
-        public void DeleteEntry(Entry entry)
+        public async void DeleteEntry(Entry entry)
         {
-            throw new NotImplementedException();
+            _db.Entries.Remove(entry);
+            await _db.SaveChangesAsync();
         }
 
         public List<Entry> GetEntries()
         {
-            throw new NotImplementedException();
+            return _db.Entries.ToList();
         }
-
-        public void UpdateEntry(Entry entry)
+        
+        public async void UpdateEntry(Entry entry)
         {
-            throw new NotImplementedException();
+            _db.Entries.Update(entry);
+            await _db.SaveChangesAsync();
         }
 
         public int GetEntryCount()
         {
-            throw new NotImplementedException();
+            return _db.Entries.Count();
+        }
+
+        public double GetAverageStrength()
+        {
+            return ((_db.Entries.Any()) ? _db.Entries.Average(e => e.Strength) : 0);
         }
     }
 }
