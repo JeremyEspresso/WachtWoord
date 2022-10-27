@@ -37,7 +37,7 @@
     private string Password = string.Empty;
     private bool IncorrectPassword = false;
 
-    void OnLoginClick()
+    private void OnLoginClick()
     {
         if (DatabaseService.Exists())
         {
@@ -54,7 +54,7 @@
         }
     }
 
-    void OnCancelClick()
+    private void OnCancelClick()
     {
         Application.Exit();
     }
