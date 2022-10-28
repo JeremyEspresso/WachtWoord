@@ -7,7 +7,7 @@ namespace WachtWoord.BLL
         public static int GetPasswordStrength(string password)
         {
             var result = Core.EvaluatePassword(password);
-            return (int)result.Score * 20;
+            return result.Score * 20;
         }
     }
 }
