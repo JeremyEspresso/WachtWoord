@@ -36,21 +36,18 @@
 @code {
     private string Password = string.Empty;
     private bool IncorrectPassword = false;
-
+    
     private void OnLoginClick()
     {
-        if (DatabaseService.Exists())
+        if (DatabaseService.Login(Password))
         {
-            if (DatabaseService.Login(Password))
-            {
-                NavigationManager.NavigateTo("/dashboard");
-            }
-            else
-            {
-                IncorrectPassword = true;
-                System.Media.SystemSounds.Asterisk.Play();
-                Password = string.Empty;
-            }
+            NavigationManager.NavigateTo("/dashboard");
+        }
+        else
+        {
+            IncorrectPassword = true;
+            System.Media.SystemSounds.Asterisk.Play();
+            Password = string.Empty;
         }
     }
 
