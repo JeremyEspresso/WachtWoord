@@ -9,7 +9,6 @@ namespace WachtWoord.SQLite
     {
         public const string DEFAULTDBFILE = "WachtWoord.db";
         public DbSet<Entry> Entries { get; set; }
-        public DbSet<Favorite> Favorites { get; set; }
 
         public static string DbPwd { get; set; }
         private SqliteConnection connection;
