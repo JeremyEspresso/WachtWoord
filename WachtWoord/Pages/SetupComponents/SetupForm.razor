@@ -15,12 +15,12 @@
                     <input @bind=@RepeatPassword @oninput="@((e) => {RepeatPassword=(string)e.Value;})" class="@(Password == RepeatPassword ? "border-zinc-400" : "border-red-500" ) shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="repeatPassword" type="password" placeholder="********">
                     @if (Password != RepeatPassword)
                     {
-                        <p class="text-red-500 text-md italic">Passwords don't match!</p>
+                        <p class="text-red-500 text-md">Passwords don't match!</p>
                     }
-                    <p class="text-zinc-500 text-sm italic">Remember your password well, you will need it anytime you want to access your passwords.</p>
+                    <p class="text-zinc-500 text-sm italic">Remember your password well, you will need it when you want to access your passwords.</p>
                 </div>
                 <div class="flex items-center justify-between">
-                    <button @onclick="OnCreateClick" class="bg-zinc-500 hover:bg-zinc-600 text-white focus:outline-zinc-800 font-bold py-2 px-4 rounded focus:shadow-outline" type="button">
+                    <button @onclick="OnCreateClick" class="bg-indigo-600 hover:bg-indigo-500 text-white focus:outline-zinc-800 font-bold py-2 px-4 rounded focus:shadow-outline" type="button">
                         Create Database
                     </button>
                     <a @onclick="OnCancelClick" tabindex="-1" class="inline-block align-baseline font-bold text-sm text-zinc-600 hover:text-black cursor-pointer">
