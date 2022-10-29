@@ -31,20 +31,19 @@
 </div>
 
 @code {
-    private EntryService _es;
+    private EntryService _es = new();
     private int _totalPasswords;
     private int _avgStrength;
 
     protected override void OnInitialized()
     {
-        _es = new EntryService();
         _totalPasswords = _es.GetEntryCount();
         _avgStrength = (int)_es.GetAverageStrength();
     }
 
     private void AddNewPassword()
     {
-        NavigationManager.NavigateTo("/add");
+        NavigationManager.NavigateTo("/NewEntry");
     }
     
 }
