@@ -1,8 +1,8 @@
 ﻿@using WachtWoord.Models.Services
 
-@for (int i = 0; i < allEntries.Count; i++)
+@foreach(Entry entry in allEntries)
     {
-        <EntryRow entry="@allEntries[i]" i="@i" OnEntrySelected="SelectedEntryUpdate" isSelected="@(selectedEntry == allEntries[i])" />
+    <EntryRow entry="@entry" OnEntrySelected="SelectedEntryUpdate" isSelected="@(selectedEntry == entry)" />
     }
 
 
