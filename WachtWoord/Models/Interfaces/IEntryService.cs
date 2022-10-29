@@ -11,7 +11,8 @@ namespace WachtWoord.Models.Interfaces
         public void AddEntry(Entry entry);
         public void DeleteEntry(Entry entry);
         public void UpdateEntry(Entry entry);
-        public List<Entry> GetEntries();
+        public List<Entry> GetAllEntries();
+        public Task<Entry> GetEntry(int id);
         public int GetEntryCount();
     }
 }

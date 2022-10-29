@@ -29,9 +29,14 @@ namespace WachtWoord.Models.Services
             await _db.SaveChangesAsync();
         }
 
-        public List<Entry> GetEntries()
+        public List<Entry> GetAllEntries()
         {
             return _db.Entries.ToList();
+        }
+
+        public async Task<Entry> GetEntry(int id)
+        {
+            return await _db.Entries.FindAsync(id);
         }
         
         public async void UpdateEntry(Entry entry)
