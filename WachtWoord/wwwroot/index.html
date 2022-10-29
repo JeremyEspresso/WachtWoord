@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" onmouseup="preventMouseupDefault()">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,6 +22,15 @@
     </div>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="_framework/blazor.webview.js"></script>
+
+    <script>
+        function preventMouseupDefault() {
+            window.addEventListener('mouseup', (e) => {
+                e.preventDefault();
+            })
+        };
+    </script>
+
 </body>
 
 </html>

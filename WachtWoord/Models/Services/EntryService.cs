@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WachtWoord.BLL;
 using WachtWoord.Models.Interfaces;
 using WachtWoord.SQLite;
+using Zxcvbn;
 
 namespace WachtWoord.Models.Services
 {
@@ -14,6 +16,9 @@ namespace WachtWoord.Models.Services
         
         public async void AddEntry(Entry entry)
         {
+            PasswordGenerator PwGenerator = new(entry.Length);
+            entry.Password = PwGenerator.GeneratePassword();
+            entry.Strength = (Core.EvaluatePassword(entry.Password).Score * 20) + 20;
             _db.Entries.Add(entry);
             await _db.SaveChangesAsync();
         }
