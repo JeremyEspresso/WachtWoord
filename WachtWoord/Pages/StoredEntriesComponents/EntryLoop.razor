@@ -2,27 +2,24 @@
 
 @foreach(Entry entry in allEntries)
     {
-    <EntryRow entry="@entry" OnEntrySelected="SelectedEntryUpdate" isSelected="@(selectedEntry == entry)" />
+        <EntryRow entry="@entry" OnEntrySelected="SelectedEntryUpdate" isSelected="@(selectedEntry == entry)" />
     }
 
 
 @code {
-    private List<Entry> allEntries = new List<Entry>();
+    [Parameter]
+    public List<Entry> allEntries { get; set; }
     private Entry? selectedEntry;
-    private readonly EntryService _entryService = new();
-
-    /*
-    TO DO:
-    - Call EntryService to get all entries
-    */
-
-    protected override void OnInitialized()
-    {
-        allEntries = _entryService.GetAllEntries();
+    
+    private void SelectedEntryUpdate(Entry entry){
+        if (entry == selectedEntry)
+        {
+            selectedEntry = null;
+        }
+        else
+        {
+            selectedEntry = entry;
+        }
     }
-
-
-    private void SelectedEntryUpdate(Entry entry) => selectedEntry = entry;
-
 }
 
