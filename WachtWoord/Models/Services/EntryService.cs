@@ -13,7 +13,7 @@ namespace WachtWoord.Models.Services
     public class EntryService : IEntryService
     {
         private readonly Database _db = new();
-        
+
         public async void AddEntry(Entry entry)
         {
             PasswordGenerator PwGenerator = new(entry.Length);
@@ -29,30 +29,31 @@ namespace WachtWoord.Models.Services
             await _db.SaveChangesAsync();
         }
 
-        public List<Entry> GetAllEntries()
-        {
-            return _db.Entries.ToList();
-        }
+        public List<Entry> GetAllEntries() => _db.Entries.ToList();
 
-        public async Task<Entry> GetEntry(int id)
-        {
-            return await _db.Entries.FindAsync(id);
-        }
-        
+        public async Task<Entry> GetEntry(int id) => await _db.Entries.FindAsync(id);
+
         public async void UpdateEntry(Entry entry)
         {
             _db.Entries.Update(entry);
             await _db.SaveChangesAsync();
         }
 
-        public int GetEntryCount()
-        {
-            return _db.Entries.Count();
-        }
+        public int GetEntryCount() => _db.Entries.Count();
 
-        public double GetAverageStrength()
+        public double GetAverageStrength() => ((_db.Entries.Any()) ? _db.Entries.Average(e => e.Strength) : 0);
+
+        public List<Entry> GetFavorites() => _db.Entries.Where(e => e.IsFavorite).ToList();
+
+        public async void Favorite(int id)
         {
-            return ((_db.Entries.Any()) ? _db.Entries.Average(e => e.Strength) : 0);
+            var result = await _db.Entries.FindAsync(id);
+            if(result != null)
+            {
+                result.IsFavorite = !result.IsFavorite;
+                await _db.SaveChangesAsync();
+            }
+            
         }
     }
 }
