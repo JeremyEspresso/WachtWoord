@@ -1,31 +1,18 @@
-﻿@foreach (Entry entry in entries)
+﻿@using WachtWoord.Models.Services
+
+@if (favoritesList.Any())
 {
-    <FavoriteCard entry="@entry" />
+    @foreach (Entry entry in favoritesList)
+    {
+        <FavoriteCard entry="@entry" />
+    }
+}
+else
+{
+    <p class="ml-2 text-gray-500 text-md">No entries marked as favorite </p>
 }
 
-
 @code {
-    private List<Entry> entries = new List<Entry>();
-
-    /*
-    TO DO:
-    - Call EntryService to get all entries
-    */
-
-    protected override void OnInitialized()
-    {
-        entries = GetEntries();
-    }
-
-    private List<Entry> GetEntries()
-    {
-        return new List<Entry>
-        {
-            new Entry{Id = 1, Password = "A", Username = "foo@test.com", Title ="Facebook", URL = "facebook.com"},
-            new Entry{Id = 1, Password = "A", Username = "foo@test.com", Title ="Facebook", URL = "facebook.com"},
-            new Entry{Id = 1, Password = "A", Username = "bar@test.com", Title ="Facebook", URL = "facebook.com"},
-        };
-    }
-
-
+    [Parameter]
+    public List<Entry> favoritesList { get; set; }
 }
