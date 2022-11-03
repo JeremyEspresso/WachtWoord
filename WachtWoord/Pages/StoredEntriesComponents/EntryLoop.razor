@@ -1,28 +1,9 @@
-﻿@using WachtWoord.Models.Services
-
-@for (int i = 0; i < allEntries.Count; i++)
+﻿@foreach (Entry entry in entries.allEntries)
     {
-        <EntryRow entry="@allEntries[i]" i="@i" OnEntrySelected="SelectedEntryUpdate" isSelected="@(selectedEntry == allEntries[i])" />
+        <EntryRow entry="@entry"/>
     }
-
 
 @code {
-    private List<Entry> allEntries = new List<Entry>();
-    private Entry? selectedEntry;
-    private readonly EntryService _entryService = new();
-
-    /*
-    TO DO:
-    - Call EntryService to get all entries
-    */
-
-    protected override void OnInitialized()
-    {
-        allEntries = _entryService.GetAllEntries();
-    }
-
-
-    private void SelectedEntryUpdate(Entry entry) => selectedEntry = entry;
-
+    [CascadingParameter]
+    public Entries entries { get; set; }
 }
-

@@ -1,0 +1,74 @@
+﻿@inject NavigationManager navigationManager
+
+<div class="flex flex-wrap w-full">
+    <div class="w-1/5" @onclick="OnCreateClick">
+        <div class="bg-zinc-100 rounded-lg p-2 m-2 h-10 cursor-pointer hover:scale-105">
+            <div class="flex flex-col">
+                <span class="text-lg font-bold text-zinc-600" >Create</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-1/5" @onclick="OnUpdateClick">
+        <div class="bg-zinc-100 rounded-lg p-2 m-2 hover:scale-105 h-10 cursor-pointer">
+            <div class="flex flex-col">
+                <span class="text-lg font-bold text-zinc-600">Update</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-1/5" @onclick="OnDeleteClick">
+        <div class="bg-zinc-100 rounded-lg p-2 m-2 hover:scale-105 h-10 cursor-pointer ">
+            <div class="flex flex-col">
+                <span class="text-lg font-bold text-zinc-600">Delete</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (displayErrorMsg && selectedEntry == null)
+{
+    <div>
+        <span class="text-red-500">@errorMsg</span>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Entry? selectedEntry { get; set; }
+    private bool displayErrorMsg = false;
+    private string errorMsg = "You must select an entry first!";
+
+    bool isSelectedNull(){
+        displayErrorMsg = true;
+        return selectedEntry == null;
+    }
+
+    void OnCreateClick()
+    {
+        navigationManager.NavigateTo("/NewEntry");
+    }
+
+    void OnUpdateClick()
+    {
+        if (!isSelectedNull())
+        { 
+            navigationManager.NavigateTo("/update/" + selectedEntry.Id);
+        }
+        else
+        {
+            displayErrorMsg = true;
+        }
+    }
+
+    void OnDeleteClick(){
+        if (!isSelectedNull())
+        {
+            navigationManager.NavigateTo("/delete/" + selectedEntry.Id);
+        }
+        else
+        {
+            displayErrorMsg = true;
+        }
+    }
+}

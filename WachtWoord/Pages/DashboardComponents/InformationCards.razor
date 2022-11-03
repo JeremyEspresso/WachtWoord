@@ -14,7 +14,7 @@
         <div class="bg-zinc-100 rounded-lg p-2 m-2 h-20">
             <div class="flex flex-col">
                 <span class="text-lg font-bold text-zinc-600">Total Passwords</span>
-                <span class="text-3xl font-bold text-zinc-700">@_es.GetEntryCount()</span>
+                <span class="text-3xl font-bold text-black">@totalPasswords</span>
             </div>
         </div>
     </div>
@@ -23,7 +23,12 @@
             <div class="flex flex-col">
                 <span class="text-lg font-bold text-zinc-600">Avg. Strength</span>
                 <div class="w-full bg-gray-200 rounded-full mt-5">
-                    <div class="bg-blue-700 text-xs font-medium text-zinc-100 text-center p-0.5 leading-none rounded-full" style="width: @_avgStrength%"> @_avgStrength% </div>
+                    @if (avgStrength != 0)
+                    {
+                        <div class="text-xs font-medium text-zinc-100 text-center p-1 leading-none rounded-full @((avgStrength > 50 ? "bg-green-600" : "bg-red-600"))" style="width: @avgStrength%">@avgStrength%</div>
+                    } else {
+                        <div class="text-xs font-medium text-zinc-100 text-center p-1 leading-none rounded-full bg-gray-600" style="width: 100%">0%</div>
+                    }
                 </div>
             </div>
         </div>
@@ -31,15 +36,10 @@
 </div>
 
 @code {
-    private EntryService _es = new();
-    private int _totalPasswords;
-    private int _avgStrength;
-
-    protected override void OnInitialized()
-    {
-        _totalPasswords = _es.GetEntryCount();
-        _avgStrength = (int)_es.GetAverageStrength();
-    }
+    [Parameter]
+    public int totalPasswords { get; set; }
+    [Parameter]
+    public double avgStrength { get; set; }
 
     private void AddNewPassword()
     {

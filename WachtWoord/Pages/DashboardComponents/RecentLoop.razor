@@ -1,0 +1,9 @@
+﻿@foreach (Entry entry in recentList)
+{
+    <RecentCard entry="@entry"/>
+}
+
+@code {
+    [Parameter]
+    public List<Entry> recentList { get; set; }
+}

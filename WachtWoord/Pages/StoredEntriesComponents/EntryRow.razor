@@ -1,25 +1,17 @@
-﻿<tr class="@((isSelected) ? "bg-violet-500" : (i % 2 == 0) ? "bg-neutral-800" : "bg-neutral-700")
-           border-b border-neutral-600 text-neutral-100"
-    @onclick="(args) => SelectedEntryUpdate(args, entry)">
-    <th class='py-4 px-6 font-medium'>@entry.Id</th>
+﻿<tr class="@((entries.selectedEntry == entry) ? "bg-blue-600 font-semibold text-white" : "hover:bg-blue-200 text-zinc-600")
+           px-6 align-middle text-sm text-left whitespace-nowrap p-4 border-b border-zinc-300"
+    @onclick="(args) => entries.SelectedEntryUpdate(entry)">
+    <th class='py-2 px-3'>@entry.Id</th>
     <td>@entry.Title</td>
-    <td>@entry.Username</td>
-    <td>@entry.URL</td>
+    <td>@(string.IsNullOrEmpty(entry.Username) ? "empty" : entry.Username)</td>
+    <td>@(string.IsNullOrEmpty(entry.URL) ? "empty" : entry.URL)</td>
+    <td>@(entry.LastModifiedDate.ToShortDateString().Equals("1-1-0001") ? "never" : entry.LastModifiedDate.ToShortDateString())</td>
 </tr>
 
 @code {
     [Parameter]
-    public bool isSelected { get; set; }
-    [Parameter]
-    public EventCallback<Entry> OnEntrySelected { get; set; }
-    [Parameter]
     public Entry entry { get; set; }
-    [Parameter]
-    public int i { get; set; }
-
-    private async Task SelectedEntryUpdate(MouseEventArgs e, Entry entry)
-    {
-        await OnEntrySelected.InvokeAsync(entry);
-    }
+    [CascadingParameter]
+    public Entries entries { get; set; }
 }
 

@@ -22,5 +22,7 @@ namespace WachtWoord.Models
             ErrorMessage = "Length can only contain numbers")]
         public int Length { get; set; }
         public DateTime CreationDate { get; set; }
+        public DateTime LastModifiedDate { get; set; }
+        public bool IsFavorite { get; set; }
     }
 }
