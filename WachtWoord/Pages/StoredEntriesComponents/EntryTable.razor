@@ -10,8 +10,9 @@
             </tr>
         </thead>
         <tbody>
-            @if(allEntries.Count != 0){
-                <EntryLoop allEntries="@allEntries"/>
+            @if (entries.allEntries.Count != 0)
+            {
+                <EntryLoop/>
             } else {
                 <tr>
                     <td>No entries found</td>
@@ -23,6 +24,6 @@
 
 
 @code{
-    [Parameter]
-    public List<Entry> allEntries { get; set; }
+    [CascadingParameter]
+    public Entries entries { get; set; }
 }

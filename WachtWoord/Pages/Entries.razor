@@ -1,15 +1,19 @@
-﻿@page "/StoredEntries"
+﻿@page "/entries"
 @using WachtWoord.Models.Services
 @using WachtWoord.Pages.StoredEntriesComponents
 <div class="overflow-hidden h-screen">
-    <CRUDCards/>
+    <CRUDCards selectedEntry="selectedEntry"/>
     <FilterOptions OnSearchChange="SearchQueryUpdate"/>
-    <EntryTable allEntries="@allEntries"/>
+    <CascadingValue Value="this">
+        <EntryTable/>
+    </CascadingValue>
+    
 </div>
 
 @code {
-    private List<Entry> allEntries = new List<Entry>();
+    public List<Entry> allEntries = new List<Entry>();
     private readonly EntryService _entryService = new();
+    public Entry? selectedEntry { get; set; }
 
     protected override void OnInitialized()
     {
@@ -23,5 +27,18 @@
         {
             allEntries = allEntries.Where(e => e.Title.ToLower().Contains(searchQuery.ToLower())).ToList();
         }
+    }
+
+    public void SelectedEntryUpdate(Entry entry)
+    {
+        if (entry == selectedEntry)
+        {
+            selectedEntry = null;
+        }
+        else
+        {
+            selectedEntry = entry;
+        }
+        StateHasChanged();
     }
 }

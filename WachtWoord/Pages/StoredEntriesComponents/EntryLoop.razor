@@ -1,24 +1,9 @@
-﻿@using WachtWoord.Models.Services
-
-@foreach(Entry entry in allEntries)
+﻿@foreach (Entry entry in entries.allEntries)
     {
-        <EntryRow entry="@entry" OnEntrySelected="SelectedEntryUpdate" isSelected="@(selectedEntry == entry)" />
+        <EntryRow entry="@entry"/>
     }
 
 @code {
-    [Parameter]
-    public List<Entry> allEntries { get; set; }
-    private Entry? selectedEntry;
-    
-    private void SelectedEntryUpdate(Entry entry){
-        if (entry == selectedEntry)
-        {
-            selectedEntry = null;
-        }
-        else
-        {
-            selectedEntry = entry;
-        }
-    }
+    [CascadingParameter]
+    public Entries entries { get; set; }
 }
-
