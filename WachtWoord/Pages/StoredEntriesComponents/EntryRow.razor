@@ -4,7 +4,14 @@
     <th class='py-2 px-3'>@entry.Id</th>
     <td>@entry.Title</td>
     <td>@(string.IsNullOrEmpty(entry.Username) ? "empty" : entry.Username)</td>
-    <td>@(string.IsNullOrEmpty(entry.URL) ? "empty" : entry.URL)</td>
+    @if (entry.URL != null)
+    {
+        <td><a class="hover:underline" href="@entry.URL">@entry.URL</a></td>
+    }
+    else
+    {
+        <td>empty</td>
+    }
     <td>@(entry.LastModifiedDate.ToShortDateString().Equals("1-1-0001") ? "never" : entry.LastModifiedDate.ToShortDateString())</td>
 </tr>
 
