@@ -42,7 +42,7 @@
             </EditForm>
         </div>
     </div>
-</div>
+</div>       
 
 @code {
     private Entry entry = new Entry(){Length = 32};
@@ -62,7 +62,6 @@
 
         IsLoading = true;
         StateHasChanged();
-        //Give time to render UI
         await Task.Delay(1);
 
         try
