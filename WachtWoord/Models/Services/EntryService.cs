@@ -52,15 +52,13 @@ namespace WachtWoord.Models.Services
 
         public List<Entry> GetFavorites() => _db.Entries.Where(e => e.IsFavorite).ToList();
 
-        public async void Favorite(int id)
+        public async void FavoriteEntry(Entry entry)
         {
-            var result = await _db.Entries.FindAsync(id);
-            if(result != null)
-            {
-                result.IsFavorite = !result.IsFavorite;
-                await _db.SaveChangesAsync();
-            }
-            
+            entry.IsFavorite = !entry.IsFavorite;
+            _db.Entries.Update(entry);
+            await _db.SaveChangesAsync();
         }
+
+        
     }
 }
