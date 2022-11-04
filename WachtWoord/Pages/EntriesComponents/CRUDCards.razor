@@ -1,35 +1,31 @@
 ﻿@using WachtWoord.Models.Services
 @inject NavigationManager navigationManager
 
-<div class="flex flex-wrap w-full">
-    <div class="w-1/5" @onclick="OnCreateClick">
+<div class="flex flex-wrap w-full text-center">
+    <div class="w-1/6" @onclick="OnCreateClick">
         <div class="bg-zinc-100 rounded-lg p-2 m-2 h-10 cursor-pointer hover:scale-105">
             <div class="flex flex-col">
-                <span class="text-lg font-bold text-zinc-600" >Create</span>
+                <span class="text-lg font-bold text-zinc-600" >
+                    Create
+                </span>
             </div>
         </div>
     </div>
 
-    <div class="w-1/5" @onclick="OnUpdateClick">
+    <div class="w-1/6" @onclick="OnUpdateClick">
         <div class="bg-zinc-100 rounded-lg p-2 m-2 hover:scale-105 h-10 cursor-pointer">
             <div class="flex flex-col">
-                <span class="text-lg font-bold text-zinc-600">Update</span>
+                <span class="text-lg font-bold text-zinc-600">Details</span>
             </div>
         </div>
     </div>
 
-    <div class="w-1/5" @onclick="OnDeleteClick">
-        <div class="bg-zinc-100 rounded-lg p-2 m-2 hover:scale-105 h-10 cursor-pointer ">
+    <div class="w-fit" @onclick="OnDeleteClick">
+        <div class="bg-red-200 rounded-lg p-2 m-2 hover:scale-105 h-10 cursor-pointer ">
             <div class="flex flex-col">
-                <span class="text-lg font-bold text-zinc-600">Delete</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="w-1/5" @onclick="OnFavoriteClick">
-        <div class="bg-zinc-100 rounded-lg p-2 m-2 hover:scale-105 h-10 cursor-pointer ">
-            <div class="flex flex-col">
-                <span class="text-lg font-bold text-zinc-600">Mark as favorite</span>
+                <span>
+                    <i class="fa-regular fa-trash-can fa-xl text-black"></i>
+                </span>
             </div>
         </div>
     </div>
@@ -47,7 +43,6 @@
     public Entry? selectedEntry { get; set; }
     private bool displayErrorMsg { get; set; }
     private string errorMsg { get; set; }
-    private readonly EntryService _entryService = new();
 
     protected override void OnInitialized()
     {
@@ -80,19 +75,11 @@
     {
         if (!isSelectedNull())
         { 
-            navigationManager.NavigateTo("/update/" + selectedEntry.Id);
+            navigationManager.NavigateTo("/details/" + selectedEntry.Id);
         }
         else
         {
             displayErrorMsg = true;
-        }
-    }
-
-    void OnFavoriteClick()
-    {
-        if (!isSelectedNull())
-        {
-            _entryService.FavoriteEntry(selectedEntry);
         }
     }
 
