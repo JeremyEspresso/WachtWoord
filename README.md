@@ -1,4 +1,4 @@
-<b>NOTE: WORK IN PROGRESS </b>
+<b>WORK IN PROGRESS </b>
 
 <hr> 
 <h1> A C# Windows Form Blazor password manager </h1> 
