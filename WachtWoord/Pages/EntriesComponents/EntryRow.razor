@@ -13,6 +13,20 @@
         <td>empty</td>
     }
     <td>@(entry.LastModifiedDate.ToShortDateString().Equals("1-1-0001") ? "never" : entry.LastModifiedDate.ToShortDateString())</td>
+    <td>
+        <button @onclick="() => entries.MarkAsFavorite(entry)">
+            @if(entry.IsFavorite){
+                <span>
+                    <i class="fa fa-heart text-red-600"></i>
+                </span>
+            } else {
+                <span>
+                    <i class="fa fa-heart text-zinc-600"></i>
+                </span>
+            }
+        </button>
+        
+    </td>
 </tr>
 
 @code {
@@ -20,5 +34,6 @@
     public Entry entry { get; set; }
     [CascadingParameter]
     public Entries entries { get; set; }
+
 }
 
