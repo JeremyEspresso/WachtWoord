@@ -41,4 +41,9 @@
         }
         StateHasChanged();
     }
+
+    public void MarkAsFavorite(Entry entry)
+    {
+        _entryService.FavoriteEntry(entry);
+    }
 }
