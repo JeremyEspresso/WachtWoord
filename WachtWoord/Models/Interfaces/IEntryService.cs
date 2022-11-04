@@ -8,11 +8,13 @@ namespace WachtWoord.Models.Interfaces
 {
     interface IEntryService
     {
-        public void AddEntry(Entry entry);
-        public void DeleteEntry(Entry entry);
-        public void UpdateEntry(Entry entry);
+        void AddEntry(Entry entry);
+        void DeleteEntry(Entry entry);
+        void UpdateEntry(Entry entry);
         public List<Entry> GetAllEntries();
-        public Task<Entry?> GetEntry(int id);
-        public int GetEntryCount();
+        Task<Entry?> GetEntry(int id);
+        int GetEntryCount();
+        void FavoriteEntry(Entry entry);
+        List<Entry> GetFavorites();
     }
 }

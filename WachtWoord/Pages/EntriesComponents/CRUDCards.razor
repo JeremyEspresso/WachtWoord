@@ -1,4 +1,5 @@
-﻿@inject NavigationManager navigationManager
+﻿@using WachtWoord.Models.Services
+@inject NavigationManager navigationManager
 
 <div class="flex flex-wrap w-full">
     <div class="w-1/5" @onclick="OnCreateClick">
@@ -24,6 +25,14 @@
             </div>
         </div>
     </div>
+
+    <div class="w-1/5" @onclick="OnFavoriteClick">
+        <div class="bg-zinc-100 rounded-lg p-2 m-2 hover:scale-105 h-10 cursor-pointer ">
+            <div class="flex flex-col">
+                <span class="text-lg font-bold text-zinc-600">Mark as favorite</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 @if (displayErrorMsg && selectedEntry == null)
@@ -36,12 +45,30 @@
 @code {
     [Parameter]
     public Entry? selectedEntry { get; set; }
-    private bool displayErrorMsg = false;
-    private string errorMsg = "You must select an entry first!";
+    private bool displayErrorMsg { get; set; }
+    private string errorMsg { get; set; }
+    private readonly EntryService _entryService = new();
+
+    protected override void OnInitialized()
+    {
+        displayErrorMsg = false;
+        errorMsg = "You must select an entry first!";
+    }
+    
+    protected override void OnParametersSet()
+    {
+        if (selectedEntry != null)
+        {
+            displayErrorMsg = false;
+        }
+    }
 
     bool isSelectedNull(){
-        displayErrorMsg = true;
-        return selectedEntry == null;
+        var result = selectedEntry == null;
+        if(result){
+            displayErrorMsg = true;
+        }
+        return result;
     }
 
     void OnCreateClick()
@@ -58,6 +85,14 @@
         else
         {
             displayErrorMsg = true;
+        }
+    }
+
+    void OnFavoriteClick()
+    {
+        if (!isSelectedNull())
+        {
+            _entryService.FavoriteEntry(selectedEntry);
         }
     }
 

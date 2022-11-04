@@ -41,5 +41,7 @@ namespace WachtWoord.Models.Services
             return await _db.History.Where(h => h.entry.Id == entryId).ToListAsync();
         }
 
+        
+
     }
 }
