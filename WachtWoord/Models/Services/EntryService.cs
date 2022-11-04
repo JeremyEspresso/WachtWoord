@@ -19,7 +19,14 @@ namespace WachtWoord.Models.Services
             PasswordGenerator PwGenerator = new(entry.Length);
             entry.Password = PwGenerator.GeneratePassword();
             entry.Strength = (Core.EvaluatePassword(entry.Password).Score * 20) + 20;
-            _db.Entries.Add(entry);
+            if (!string.IsNullOrEmpty(entry.URL))
+            {
+                if (!(entry.URL.StartsWith("http://") || entry.URL.StartsWith("https://")))
+                {
+                    entry.URL = "https://" + entry.URL;
+                }
+            }
+            await _db.Entries.AddAsync(entry);
             await _db.SaveChangesAsync();
         }
 
@@ -31,7 +38,7 @@ namespace WachtWoord.Models.Services
 
         public List<Entry> GetAllEntries() => _db.Entries.ToList();
 
-        public async Task<Entry> GetEntry(int id) => await _db.Entries.FindAsync(id);
+        public async Task<Entry?> GetEntry(int id) => await _db.Entries.FindAsync(id);
 
         public async void UpdateEntry(Entry entry)
         {
