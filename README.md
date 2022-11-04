@@ -1,6 +1,5 @@
 <b>NOTE: WORK IN PROGRESS </b>
 
 <hr> 
-A C# Windows Form Blazor password manager.
-<hr>
-Uses SQLCipher with EFCore to create an encrypted .db file. This .db file will be created in the applications directory.
+<h1> A C# Windows Form Blazor password manager </h1> 
+Uses SQLCipher with EFCore to create an encrypted .db file, which will be created in the applications directory. If you want to use WachtWoord on multiple devices copy and pasting the WachtWoord.db file to the applications directory will allow you to log in to that database.
