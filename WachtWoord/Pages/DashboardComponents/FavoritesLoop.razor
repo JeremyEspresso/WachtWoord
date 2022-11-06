@@ -4,12 +4,12 @@
 {
     @foreach (Entry entry in favoritesList)
     {
-        <FavoriteCard entry="@entry" />
+        <FavoriteCard entry="@entry"/>
     }
 }
 else
 {
-    <p class="ml-2 text-gray-500 text-md">No entries marked as favorite </p>
+    <span class="ml-2 text-gray-500 text-md">No entries marked as favorite </span>
 }
 
 @code {

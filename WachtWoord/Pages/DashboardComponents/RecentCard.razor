@@ -1,8 +1,22 @@
-﻿
-<div class="relative group max-w-screen mr-3 shadow-sm">
-    <div class="flex mt-2 relative px-5 py-4 bg-zinc-100/50 rounded-md leading-none hover:bg-zinc-100 ">
-        <span class="uppercase">@entry.Title</span>
+﻿@inject NavigationManager navigationManager
+@using System.Windows.Forms;
 
+<div class="relative mt-1 max-w-screen mr-3 shadow-sm bg-neutral-700/50 hover:bg-neutral-600 ">
+    <div class="flex relative px-5 py-4 leading-none">
+        <span class="uppercase text-zinc-300 font-semibold mr-2">@entry.Title</span>
+        <div class="lowercase text-zinc-300 font-normal">
+            <span>@entry.URL</span>
+            <div class="text-violet-300">               
+                <span @onclick="OnCopyClick">
+                    <i class="fa-regular fa-copy mr-1 hover:text-violet-200 hover:cursor-pointer"></i>
+                </span>
+                <span @onclick="OnViewClick">
+                    <i class="fa-regular fa-eye hover:text-violet-200 hover:cursor-pointer"></i>
+                </span>
+            </div>
+            
+            <span class="absolute right-3 bottom-4 text-zinc-500">@entry.CreationDate.ToString("yyyy-MM-dd")</span>
+        </div>
     </div>
 </div>
 
@@ -11,5 +25,15 @@
     [Parameter]
     public Entry entry { get; set; }
 
+    void OnCopyClick()
+    {
+        Clipboard.SetText(entry.Password);
+    }
+
+    void OnViewClick()
+    {
+        navigationManager.NavigateTo("/details/" + entry.Id);
+    }
+    
 }
 

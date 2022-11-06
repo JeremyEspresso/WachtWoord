@@ -1,30 +1,42 @@
-﻿<div class="w-35 fixed font-semibold tracking-tight uppercase " aria-label="Sidebar">
-    <div class="h-screen overflow-hidden py-4 px-3 bg-zinc-100 flex items-center drop-shadow-sm rounded-r-md">
-        <ul class="space-y-1">
-            <li class="transition ease-in-out duration-400 underline decoration-transparent hover:decoration-pink-500">
-                <a href="/dashboard" @onclick='() => Active = "dashboard"' class="@(Active== "dashboard" ? "text-pink-500" : "text-black")">
-                    dashboard
-                </a>
-            </li>
-            <li class="transition ease-in-out duration-400 underline decoration-transparent hover:decoration-pink-500">
-                <a href="/Entries" @onclick='() => Active = "passwords"' class="@(Active== "passwords" ? "text-pink-500" : "text-black")">
-                    passwords
-                </a>
-            </li>
-            <li class="transition ease-in-out duration-400 underline decoration-transparent hover:decoration-pink-500">
-                <a href="/archive" @onclick='() => Active = "archive"' class="@(Active== "archive" ? "text-pink-500" : "text-black")">
-                    archive
-                </a>
-            </li>
-            <li class="transition ease-in-out duration-400 underline decoration-transparent hover:decoration-pink-500">
-                <a href="/settings" @onclick='() => Active = "settings"' class="@(Active == "settings" ? "text-pink-500" : "text-black")">
-                    settings
-                </a>
-            </li>
-        </ul>
-    </div>
+﻿@using WachtWoord.Shared.NavBarComponents
+@inject NavigationManager navigationManager
+
+<div class="bg-neutral-700/30">
+    <span style="z-index: 1;" class="absolute left-2.5 top-2 text-zinc-100 hover:cursor-pointer hover:text-amber-500" title="Minimize" @onclick="ToggleExpanded">
+        <i class="fa-solid fa-bars fa-xl"></i>
+    </span>
+    @if (Expanded)
+    {
+        <Expanded Active="@Active" />
+    }
+    else
+    {
+        <Minimized Active="@Active" />
+        
+    }
 </div>
 
+
+
+
 @code {
-    private string Active = "dashboard";
+    public string Active { get; set; }
+    public bool Expanded { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        navigationManager.LocationChanged += LocationChanged;
+        Active = navigationManager.Uri.Split("/").Last();
+    }
+
+    void LocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        Active = e.Location.Split("/").Last();
+        StateHasChanged();
+    }
+
+    public void ToggleExpanded()
+    {
+        Expanded = !Expanded;
+    }
 }

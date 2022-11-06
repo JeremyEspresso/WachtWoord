@@ -1,12 +1,13 @@
-﻿<div class="overflow-y-scroll overflow-x-hidden h-5/6">
-    <table class=" table-auto w-full">
-        <thead class="h-8 bg-gray-200 text-zinc-800 border-b border-solid border-gray-300 text-xs uppercase whitespace-nowrap font-semibold text-left sticky top-0">
+﻿<div class="overflow-y-auto overflow-x-hidden h-5/6">
+    <table class="table-auto w-full">
+        <thead class="h-8 bg-neutral-600 text-white text-xs uppercase whitespace-nowrap font-semibold text-left sticky top-0">
             <tr>
-                <th>Id</th>
+                <th class="rounded-tl py-2 px-3">#</th>
                 <th>Title</th>
                 <th>Username</th>
                 <th>URL</th>
                 <th>Last Modified</th>
+                <th class="rounded-tr"><span> <i class="fa fa-heart fa-lg"></i></span></th>
             </tr>
         </thead>
         <tbody>
@@ -15,7 +16,7 @@
                 <EntryLoop/>
             } else {
                 <tr>
-                    <td>No entries found</td>
+                    <td class="text-zinc-300">No entries found</td>
                 </tr>
             }
         </tbody>

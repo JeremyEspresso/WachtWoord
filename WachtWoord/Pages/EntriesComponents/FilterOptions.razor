@@ -1,13 +1,25 @@
-﻿<input class="appearance-none border rounded py-1 px-2 text-gray-700 mb-3 leading-tight focus:outline-blue-200" type="text"
-       @oninput="@((args) => SearchQueryUpdate(args, (string)args.Value))"
-       placeholder="Search" 
-/>
+﻿<button @onclick="@((args) => SearchQueryUpdate(args, "All"))" class="bg-violet-500 text-zinc-100 hover:bg-violet-400 py-1 px-2 rounded focus:outline-violet-200 " type="button">
+    <span title="Refresh">
+        <i class="fa-solid fa-arrows-rotate"></i>
+    </span>
+</button>
 
-@code{
+
+<button @onclick="@((args) => SearchQueryUpdate(args, "Favorites"))" class="bg-violet-500/80 text-zinc-100 hover:bg-violet-400 py-1 px-2 rounded focus:outline-violet-200/80" type="button">
+    <span title="Show favorites only">
+        <i class="fas fa-heart"></i>
+    </span>
+</button>
+
+<input class="appearance-none border rounded py-1 px-2 text-gray-700 mb-3 leading-tight focus:outline-violet-200" type="text"
+       @oninput="@((args) => SearchQueryUpdate(args, (string)args.Value))"
+       placeholder="Search" />
+
+@code {
     [Parameter]
     public EventCallback<string> OnSearchChange { get; set; }
 
-    private async Task SearchQueryUpdate(ChangeEventArgs e, string value)
+    private async Task SearchQueryUpdate(EventArgs e, string value)
     {
         await OnSearchChange.InvokeAsync(value);
     }

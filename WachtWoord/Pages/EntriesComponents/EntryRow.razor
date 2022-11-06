@@ -1,18 +1,18 @@
-﻿<tr class="@((entries.selectedEntry == entry) ? "bg-blue-600 font-semibold text-white" : "hover:bg-blue-200 text-zinc-600")
-           px-6 align-middle text-sm text-left whitespace-nowrap p-4 border-b border-zinc-300"
+﻿<tr class="@((entries.selectedEntry == entry) ? "bg-violet-500/90 font-semibold text-white" : "hover:bg-violet-400 hover:text-zinc-200 bg-neutral-700/80 text-zinc-300")
+           px-6 align-middle text-sm text-left whitespace-nowrap p-4 border-b border-neutral-600"
     @onclick="(args) => entries.SelectedEntryUpdate(entry)">
     <th class='py-2 px-3'>@entry.Id</th>
     <td>@entry.Title</td>
-    <td>@(string.IsNullOrEmpty(entry.Username) ? "empty" : entry.Username)</td>
+    <td>@entry.Username</td>
     @if (entry.URL != null)
     {
         <td><a class="hover:underline" href="@entry.URL">@entry.URL</a></td>
     }
     else
     {
-        <td>empty</td>
+        <td></td>
     }
-    <td>@(entry.LastModifiedDate.ToShortDateString().Equals("1-1-0001") ? "never" : entry.LastModifiedDate.ToShortDateString())</td>
+    <td>@(entry.LastModifiedDate == DateTime.MinValue ? "never" : entry.LastModifiedDate.ToShortDateString())</td>
     <td>
         <button @onclick="() => entries.MarkAsFavorite(entry)">
             @if(entry.IsFavorite){

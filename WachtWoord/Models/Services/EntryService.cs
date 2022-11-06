@@ -19,6 +19,7 @@ namespace WachtWoord.Models.Services
             PasswordGenerator PwGenerator = new(entry.Length);
             entry.Password = PwGenerator.GeneratePassword();
             entry.Strength = (Core.EvaluatePassword(entry.Password).Score * 20) + 20;
+            entry.CreationDate = DateTime.Now;
             if (!string.IsNullOrEmpty(entry.URL))
             {
                 if (!(entry.URL.StartsWith("http://") || entry.URL.StartsWith("https://")))

@@ -1,30 +1,38 @@
 ﻿@using WachtWoord.Models.Services
 @inject NavigationManager navigationManager
 
-<div class="flex flex-wrap w-full text-center">
-    <div class="w-1/6" @onclick="OnCreateClick">
-        <div class="bg-zinc-100 rounded-lg p-2 m-2 h-10 cursor-pointer hover:scale-105">
+<div class="flex flex-wrap w-full text-center mb-2">
+    <div class="w-28" @onclick="OnCreateClick">
+        <div class="bg-neutral-700 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-neutral-600">
             <div class="flex flex-col">
-                <span class="text-lg font-bold text-zinc-600" >
+                <span class="text-lg font-semibold text-zinc-100">
                     Create
                 </span>
             </div>
         </div>
     </div>
 
-    <div class="w-1/6" @onclick="OnUpdateClick">
-        <div class="bg-zinc-100 rounded-lg p-2 m-2 hover:scale-105 h-10 cursor-pointer">
+    <div class="w-28" @onclick="OnUpdateClick">
+        <div class="bg-neutral-700/80 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-neutral-600/80">
             <div class="flex flex-col">
-                <span class="text-lg font-bold text-zinc-600">Details</span>
+                <span class="text-lg font-semibold text-zinc-100">Details</span>
             </div>
         </div>
     </div>
 
-    <div class="w-fit" @onclick="OnDeleteClick">
-        <div class="bg-red-200 rounded-lg p-2 m-2 hover:scale-105 h-10 cursor-pointer ">
+    <div class="w-28">
+        <div class="bg-neutral-700/60 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-neutral-600/60">
+            <div class="flex flex-col">
+                <span class="text-lg font-semibold text-zinc-100">Copy</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-fit ml-auto" @onclick="OnDeleteClick">
+        <div class="bg-red-700 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-red-600">
             <div class="flex flex-col">
                 <span>
-                    <i class="fa-regular fa-trash-can fa-xl text-black"></i>
+                    <i class="fa-regular fa-trash-can fa-xl text-white"></i>
                 </span>
             </div>
         </div>
@@ -38,18 +46,21 @@
     </div>
 }
 
+
+
 @code {
     [Parameter]
     public Entry? selectedEntry { get; set; }
     private bool displayErrorMsg { get; set; }
     private string errorMsg { get; set; }
+    private bool displayDeleteModal { get; set; }
 
     protected override void OnInitialized()
     {
         displayErrorMsg = false;
-        errorMsg = "You must select an entry first!";
+        errorMsg = "Please select an entry first.";
     }
-    
+
     protected override void OnParametersSet()
     {
         if (selectedEntry != null)
@@ -58,9 +69,11 @@
         }
     }
 
-    bool isSelectedNull(){
+    bool isSelectedNull()
+    {
         var result = selectedEntry == null;
-        if(result){
+        if (result)
+        {
             displayErrorMsg = true;
         }
         return result;
@@ -74,7 +87,7 @@
     void OnUpdateClick()
     {
         if (!isSelectedNull())
-        { 
+        {
             navigationManager.NavigateTo("/details/" + selectedEntry.Id);
         }
         else
@@ -83,10 +96,11 @@
         }
     }
 
-    void OnDeleteClick(){
+    void OnDeleteClick()
+    {
         if (!isSelectedNull())
         {
-            navigationManager.NavigateTo("/delete/" + selectedEntry.Id);
+            displayDeleteModal = true;
         }
         else
         {

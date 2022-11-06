@@ -3,7 +3,6 @@
 @page "/dashboard"
 
 <div>
-    <h1 class="ml-2 text-xl font-bold text-zinc-800">Dashboard</h1>
     <InformationCards avgStrength="@avgStrength" totalPasswords="@totalPasswords"/>
     <Favorites favoritesList="@favoritesList"/>
     <Recent recentList="@recentList"/>
@@ -15,7 +14,7 @@
     public List<Entry> recentList { get; set; }
     public double avgStrength { get; set; }
     public int totalPasswords { get; set; }
-
+    
     protected override void OnInitialized()
     {
         var AllEntries = _entryService.GetAllEntries();
