@@ -16,9 +16,9 @@ namespace WachtWoord.Models
         public int Strength { get; set; }
         [Required]
         [NotMapped]
-        [Range(16, 128, 
+        [Range(16, 128,
             ErrorMessage = "Password length must be between 16 and 128 characters")]
-        [RegularExpression(@"^[0-9]+$", 
+        [RegularExpression(@"^[0-9]+$",
             ErrorMessage = "Length can only contain numbers")]
         public int Length { get; set; }
         public DateTime CreationDate { get; set; }

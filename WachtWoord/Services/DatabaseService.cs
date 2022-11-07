@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WachtWoord.SQLite;
 
-namespace WachtWoord.SQLite
+namespace WachtWoord.Services
 {
     public class DatabaseService
     {
-        
+
         public static bool Exists()
         {
             return File.Exists(Database.DEFAULTDBFILE);

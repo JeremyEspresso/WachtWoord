@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WachtWoord.Models.Interfaces;
 using WachtWoord.SQLite;
 
@@ -25,7 +19,7 @@ namespace WachtWoord.Models.Services
             _db.History.Remove(history);
             await _db.SaveChangesAsync();
         }
-        
+
         public async Task<History?> GetHistory(int id)
         {
             return await _db.History.FindAsync(id);
