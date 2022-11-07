@@ -65,7 +65,6 @@ namespace WachtWoord.BLL
                 prev = next;
 
             }
-
             return password.ToString();
         }
     }
