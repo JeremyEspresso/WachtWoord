@@ -10,7 +10,7 @@ namespace WachtWoord.Models.Interfaces
     {
         void AddEntry(Entry entry);
         void DeleteEntry(Entry entry);
-        void UpdateEntry(Entry entry);
+        void UpdateEntry(int Id, Entry entry);
         public List<Entry> GetAllEntries();
         Task<Entry?> GetEntry(int id);
         int GetEntryCount();

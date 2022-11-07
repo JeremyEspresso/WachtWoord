@@ -41,9 +41,20 @@ namespace WachtWoord.Models.Services
 
         public async Task<Entry?> GetEntry(int id) => await _db.Entries.FindAsync(id);
 
-        public async void UpdateEntry(Entry entry)
+        public async void UpdateEntry(int id, Entry entry)
         {
-            _db.Entries.Update(entry);
+            var result = _db.Entries.Find(id);
+            if (result != null)
+            {
+                result.Title = entry.Title;
+                result.Username = entry.Username;
+                result.Password = entry.Password;
+                result.URL = entry.URL;
+                result.Strength = entry.Strength;
+                result.CreationDate = entry.CreationDate;
+                result.LastModifiedDate = DateTime.Now;
+                await _db.SaveChangesAsync();
+            }
             await _db.SaveChangesAsync();
         }
 
