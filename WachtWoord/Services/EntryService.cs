@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WachtWoord.BLL;
+﻿using WachtWoord.BLL;
 using WachtWoord.Models.Interfaces;
 using WachtWoord.SQLite;
 using Zxcvbn;
@@ -71,6 +66,6 @@ namespace WachtWoord.Models.Services
             await _db.SaveChangesAsync();
         }
 
-        
+
     }
 }

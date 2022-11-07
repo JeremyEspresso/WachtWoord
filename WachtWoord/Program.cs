@@ -1,8 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
 using WachtWoord.BLL;
-using WachtWoord.Models;
-using WachtWoord.SQLite;
 
 namespace WachtWoord
 {

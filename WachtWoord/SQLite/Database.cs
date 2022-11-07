@@ -15,7 +15,7 @@ namespace WachtWoord.SQLite
         private SqliteConnection connection;
 
         public Database() { }
-        
+
         public Database(string databasePassword)
         {
             DbPwd = databasePassword;

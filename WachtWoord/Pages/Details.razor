@@ -1,5 +1,6 @@
 ﻿@page "/details/{Id:int}"
 @using WachtWoord.Models.Services
+@using WachtWoord.Services
 
 <div class=" w-full">
     <div disabled=@IsLoading class="@(IsLoading ? "cursor-wait" : "") grid h-screen place-items-center">
