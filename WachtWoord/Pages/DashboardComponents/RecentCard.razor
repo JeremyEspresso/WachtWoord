@@ -5,7 +5,6 @@
     <div class="flex relative px-5 py-4 leading-none">
         <span class="uppercase text-zinc-300 font-semibold mr-2">@entry.Title</span>
         <div class="lowercase text-zinc-300 font-normal">
-            <span>@entry.URL</span>
             <div class="text-violet-300">               
                 <span @onclick="OnCopyClick">
                     <i class="fa-regular fa-copy mr-1 hover:text-violet-200 hover:cursor-pointer"></i>
@@ -13,8 +12,17 @@
                 <span @onclick="OnViewClick">
                     <i class="fa-regular fa-eye hover:text-violet-200 hover:cursor-pointer"></i>
                 </span>
+                @if (!string.IsNullOrEmpty(entry.Username))
+                {
+                    <span class="border-r ml-1 border-neutral-600/50"></span>
+                    <span class="text-zinc-300">@entry.Username</span>
+                }
+                @if (!string.IsNullOrEmpty(entry.URL))
+                {
+                    <span class="border-r ml-1 border-neutral-600/50"></span>
+                    <a href="@entry.URL" class="text-zinc-300 underline">@entry.URL</a>
+                }
             </div>
-            
             <span class="absolute right-3 bottom-4 text-zinc-500">@entry.CreationDate.ToString("yyyy-MM-dd")</span>
         </div>
     </div>

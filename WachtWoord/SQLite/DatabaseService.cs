@@ -21,7 +21,7 @@ namespace WachtWoord.SQLite
         {
             try
             {
-                using var db = new Database(password);
+                using Database db = new(password);
                 db.Database.EnsureCreated();
                 return true;
             }
