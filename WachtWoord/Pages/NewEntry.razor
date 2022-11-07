@@ -47,7 +47,7 @@
 
 @code {
     private Entry entry = new Entry() { Length = 32 };
-    private EntryService _EntryService = new();
+    private readonly EntryService _EntryService = new();
     private EditContext? editContext;
     private bool IsLoading = false;
 
