@@ -4,13 +4,13 @@ using WachtWoord.SQLite;
 
 namespace WachtWoord.Models.Services
 {
-    public class HistoryService : IHistoryService
+    public class HistoryService
     {
         private readonly Database _db = new();
-        public async void AddHistory(History history)
+        
+        public async void AddHistory(string password, Entry entry)
         {
-            await _db.History.AddAsync(history);
-            await _db.SaveChangesAsync();
+            throw new NotImplementedException;
         }
 
         public async void DeleteHistory(History history)
@@ -30,10 +30,7 @@ namespace WachtWoord.Models.Services
             return await _db.History.ToListAsync();
         }
 
-        public async Task<List<History>> GetEntryHistory(int entryId)
-        {
-            return await _db.History.Where(h => h.entry.Id == entryId).ToListAsync();
-        }
+        
 
     }
 }

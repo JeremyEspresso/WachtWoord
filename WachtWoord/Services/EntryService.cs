@@ -22,7 +22,7 @@ namespace WachtWoord.Models.Services
                     entry.URL = "https://" + entry.URL;
                 }
             }
-            await _db.Entries.AddAsync(entry);
+            _db.Entries.Add(entry);
             await _db.SaveChangesAsync();
         }
 
@@ -44,13 +44,18 @@ namespace WachtWoord.Models.Services
                 result.Title = entry.Title;
                 result.Username = entry.Username;
                 result.Password = entry.Password;
-                result.URL = entry.URL;
+                if (!string.IsNullOrEmpty(entry.URL))
+                {
+                    if (!(entry.URL.StartsWith("http://") || entry.URL.StartsWith("https://")))
+                    {
+                        entry.URL = "https://" + entry.URL;
+                    }
+                }
                 result.Strength = entry.Strength;
                 result.CreationDate = entry.CreationDate;
                 result.LastModifiedDate = DateTime.Now;
                 await _db.SaveChangesAsync();
             }
-            await _db.SaveChangesAsync();
         }
 
         public int GetEntryCount() => _db.Entries.Count();
