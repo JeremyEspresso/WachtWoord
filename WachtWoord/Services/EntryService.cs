@@ -1,4 +1,5 @@
-﻿using WachtWoord.BLL;
+﻿using Microsoft.EntityFrameworkCore;
+using WachtWoord.BLL;
 using WachtWoord.Models.Interfaces;
 using WachtWoord.SQLite;
 using Zxcvbn;
@@ -26,9 +27,11 @@ namespace WachtWoord.Models.Services
             await _db.SaveChangesAsync();
         }
 
-        public async void DeleteEntry(Entry entry)
+        public async void DeleteEntry(int Id)
         {
-            _db.Entries.Remove(entry);
+            var entryToDelete = _db.Entries.Include(e => e.history).FirstOrDefault(e => e.Id == Id);
+            if (entryToDelete == null) return;
+            _db.Entries.Remove(entryToDelete);
             await _db.SaveChangesAsync();
         }
 
@@ -36,9 +39,9 @@ namespace WachtWoord.Models.Services
 
         public async Task<Entry?> GetEntry(int id) => await _db.Entries.FindAsync(id);
 
-        public async void UpdateEntry(int id, Entry entry)
+        public async void UpdateEntry(int Id, Entry entry)
         {
-            var result = _db.Entries.Find(id);
+            var result = _db.Entries.Find(Id);
             if (result != null)
             {
                 result.Title = entry.Title;
