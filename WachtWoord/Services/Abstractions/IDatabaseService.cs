@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WachtWoord.SQLite
+﻿namespace WachtWoord.Services.Interfaces
 {
     public interface IDatabaseService
     {

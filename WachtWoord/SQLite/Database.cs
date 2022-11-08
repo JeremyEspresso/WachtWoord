@@ -1,7 +1,9 @@
 ﻿
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using WachtWoord.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace WachtWoord.SQLite
 {
@@ -15,7 +17,7 @@ namespace WachtWoord.SQLite
         private SqliteConnection connection;
 
         public Database() { }
-        
+
         public Database(string databasePassword)
         {
             DbPwd = databasePassword;

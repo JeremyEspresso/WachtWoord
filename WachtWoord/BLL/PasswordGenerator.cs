@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using WachtWoord.Models;
 
 namespace WachtWoord.BLL
@@ -41,14 +37,14 @@ namespace WachtWoord.BLL
             //Fisher-Yates shuffle
             Random random = new();
             int n = chars.Length;
-            for(int i = 0; i < (n - 1); i++)
+            for (int i = 0; i < (n - 1); i++)
             {
                 int r = i + random.Next(n - i);
                 (chars[i], chars[r]) = (chars[r], chars[i]);
             }
             return chars.ToString();
         }
-        
+
         //<summary>
         //Generates a password
         //</summary>
@@ -61,7 +57,7 @@ namespace WachtWoord.BLL
             //Random number generator no sequence
             int prev, next;
             prev = -1;
-            for(int i = 0; i < Length; i++)
+            for (int i = 0; i < Length; i++)
             {
                 next = RandomNumberGenerator.GetInt32(0, chars.Length - 1);
                 while (next == prev) next = RandomNumberGenerator.GetInt32(0, chars.Length - 1);
@@ -69,7 +65,6 @@ namespace WachtWoord.BLL
                 prev = next;
 
             }
-
             return password.ToString();
         }
     }

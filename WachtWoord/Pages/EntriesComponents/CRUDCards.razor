@@ -1,4 +1,4 @@
-﻿@using WachtWoord.Models.Services
+﻿@using WachtWoord.Services
 @inject NavigationManager navigationManager
 
 <div class="flex flex-wrap w-full text-center mb-2">
@@ -15,12 +15,12 @@
     <div class="w-28" @onclick="OnUpdateClick">
         <div class="bg-neutral-700/80 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-neutral-600/80">
             <div class="flex flex-col">
-                <span class="text-lg font-semibold text-zinc-100">Details</span>
+                <span class="text-lg font-semibold text-zinc-100">Edit</span>
             </div>
         </div>
     </div>
 
-    <div class="w-28">
+    <div class="w-28" @onclick="OnCopyClick">
         <div class="bg-neutral-700/60 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-neutral-600/60">
             <div class="flex flex-col">
                 <span class="text-lg font-semibold text-zinc-100">Copy</span>
@@ -28,15 +28,7 @@
         </div>
     </div>
 
-    <div class="w-fit ml-auto" @onclick="OnDeleteClick">
-        <div class="bg-red-700 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-red-600">
-            <div class="flex flex-col">
-                <span>
-                    <i class="fa-regular fa-trash-can fa-xl text-white"></i>
-                </span>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 @if (displayErrorMsg && selectedEntry == null)
@@ -45,8 +37,6 @@
         <span class="text-red-500">@errorMsg</span>
     </div>
 }
-
-
 
 @code {
     [Parameter]
@@ -88,19 +78,19 @@
     {
         if (!isSelectedNull())
         {
-            navigationManager.NavigateTo("/details/" + selectedEntry.Id);
+            navigationManager.NavigateTo("/edit/" + selectedEntry.Id);
         }
         else
         {
             displayErrorMsg = true;
         }
     }
-
-    void OnDeleteClick()
+    
+    void OnCopyClick()
     {
         if (!isSelectedNull())
         {
-            displayDeleteModal = true;
+            Clipboard.SetText(selectedEntry.Password);
         }
         else
         {

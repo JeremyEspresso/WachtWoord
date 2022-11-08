@@ -6,10 +6,10 @@
         <span class="uppercase text-zinc-300 font-semibold mr-2">@entry.Title</span>
         <div class="lowercase text-zinc-300 font-normal">
             <div class="text-violet-300">               
-                <span @onclick="OnCopyClick">
+                <span @onclick="OnCopyClick" title="Copy Password">
                     <i class="fa-regular fa-copy mr-1 hover:text-violet-200 hover:cursor-pointer"></i>
                 </span>
-                <span @onclick="OnViewClick">
+                <span @onclick="OnViewClick" title="View Details">
                     <i class="fa-regular fa-eye hover:text-violet-200 hover:cursor-pointer"></i>
                 </span>
                 @if (!string.IsNullOrEmpty(entry.Username))
@@ -40,7 +40,7 @@
 
     void OnViewClick()
     {
-        navigationManager.NavigateTo("/details/" + entry.Id);
+        navigationManager.NavigateTo("/Edit/" + entry.Id);
     }
     
 }

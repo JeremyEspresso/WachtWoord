@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WachtWoord.Models.Interfaces;
 using WachtWoord.SQLite;
 
 namespace WachtWoord.Models.Services
 {
-    public class HistoryService : IHistoryService
+    public class HistoryService
     {
         private readonly Database _db = new();
-        public async void AddHistory(History history)
+        
+        public async void AddHistory(string password, Entry entry)
         {
-            await _db.History.AddAsync(history);
+            entry.history.Add(new History
+            {
+                Password = password,
+                DateChanged = DateTime.Now
+            });
+            _db.Update(entry);
             await _db.SaveChangesAsync();
         }
 
@@ -25,7 +25,7 @@ namespace WachtWoord.Models.Services
             _db.History.Remove(history);
             await _db.SaveChangesAsync();
         }
-        
+
         public async Task<History?> GetHistory(int id)
         {
             return await _db.History.FindAsync(id);
@@ -35,11 +35,5 @@ namespace WachtWoord.Models.Services
         {
             return await _db.History.ToListAsync();
         }
-
-        public async Task<List<History>> GetEntryHistory(int entryId)
-        {
-            return await _db.History.Where(h => h.entry.Id == entryId).ToListAsync();
-        }
-
     }
 }
