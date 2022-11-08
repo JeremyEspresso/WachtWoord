@@ -1,9 +1,10 @@
-﻿<h2 class="ml-2 text-lg font-semibold text-zinc-600">Favorites</h2>
+﻿<h2 class="ml-2 text-lg font-semibold text-zinc-100">Favorites <span><i class="fa-solid fa-heart text-sm text-zinc-100"></i></span></h2>
 <div class="overflow-hidden flex flex-wrap">
-    <FavoritesLoop />
+    <FavoritesLoop favoritesList="@favoritesList" />
 </div>
 
-
-@code {
-
+@code{
+    [Parameter]
+    public List<Entry> favoritesList { get; set; }
 }
+

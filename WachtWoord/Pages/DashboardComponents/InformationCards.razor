@@ -1,0 +1,56 @@
+﻿@inject NavigationManager NavigationManager
+
+@using WachtWoord.Services
+<div class="flex flex-wrap">
+    <div class="w-1/5">
+        <div class="bg-violet-700 rounded-lg p-2 m-2 h-20 cursor-pointer hover:scale-105" @onclick="OnNewEntryClick">
+            <div class="flex flex-col">
+                <span class="text-lg font-semibold text-neutral-100">New Entry</span>
+                <span>
+                    <i class="fa-solid fa-key fa-2xl mt-1 text-violet-200 "></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="w-1/5">
+        <div class="bg-violet-700/80 rounded-lg p-2 m-2 h-20 cursor-pointer hover:scale-105" @onclick="OnTotalPasswordsClick">
+            <div class="flex flex-col">
+                <span class="text-lg font-semibold text-neutral-200">Total Passwords</span>
+                <span class="text-3xl font-bold text-zinc-100 drop-shadow-md">@totalPasswords</span>
+            </div>
+        </div>
+    </div>
+    <div class="w-1/5 h-auto">
+        <div class="bg-violet-700/60 rounded-lg p-2 m-2 h-20">
+            <div class="flex flex-col">
+                <span class="text-lg font-semibold text-neutral-200">Avg. Strength</span>
+                <div class="w-full rounded-full mt-5 drop-shadow-md">
+                    @if (avgStrength != 0)
+                    {
+                        <div class="text-xs font-medium text-zinc-100 text-center p-1 leading-none rounded-full @((avgStrength > 50 ? "bg-green-600" : "bg-red-600"))" style="width: @avgStrength%">@avgStrength%</div>
+                    } else {
+                        <div class="text-xs font-medium text-zinc-100 text-center p-1 leading-none rounded-full bg-gray-600" style="width: 100%">0%</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int totalPasswords { get; set; }
+    [Parameter]
+    public double avgStrength { get; set; }
+    
+    void OnNewEntryClick()
+    {
+        NavigationManager.NavigateTo("/newentry");
+    }
+
+    void OnTotalPasswordsClick()
+    {
+        NavigationManager.NavigateTo("/entries");
+    }
+    
+}

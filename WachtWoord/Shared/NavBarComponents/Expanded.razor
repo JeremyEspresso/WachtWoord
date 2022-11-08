@@ -1,0 +1,23 @@
+﻿<div>
+    <div class="h-screen w-36 font-semibold tracking-tight uppercase overflow-hidden py-4 px-3 flex drop-shadow-sm ">
+        <ul class="space-y-1 mt-10">
+            <li class="flex-row align-center  transition ease-in-out duration-400 @(string.Equals(Active, "dashboard", StringComparison.OrdinalIgnoreCase) ? "text-violet-500" : "text-zinc-100 hover:text-amber-400")">
+                <a href="/dashboard">
+                    dashboard
+                </a>
+            </li>
+            <li class="transition ease-in-out duration-400 @(string.Equals(Active, "entries", StringComparison.OrdinalIgnoreCase) ? "text-violet-500" : "text-zinc-100 hover:text-amber-400")">
+                <a href="/Entries">
+                    <span>
+                        All Entries
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Active { get; set; }
+}

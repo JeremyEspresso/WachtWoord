@@ -1,0 +1,14 @@
+﻿<div class="ml-2">
+    <h2 class="text-lg font-semibold text-zinc-100">Recent <span><i class="fa-regular fa-clock text-sm text-zinc-100"></i></span></h2>
+    @if(recentList.Any()){
+        <RecentLoop recentList="@recentList" />
+    } else {
+        <p class="text-gray-500 text-md">No recent entries </p>
+    }
+</div>
+
+@code{
+    [Parameter]
+    public List<Entry> recentList { get; set; }
+}
+

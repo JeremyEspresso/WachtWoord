@@ -1,0 +1,9 @@
+﻿@foreach (Entry entry in entries.allEntries)
+    {
+        <EntryRow entry="@entry"/>
+    }
+
+@code {
+    [CascadingParameter]
+    public Entries entries { get; set; }
+}

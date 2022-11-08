@@ -27,13 +27,13 @@ namespace WachtWoord.BLL
         {
             if (File.Exists(path)) File.Delete(path);
         }
-        
+
         public static UserSettings? Read()
         {
             if (!File.Exists(path)) return null;
             string JSONres = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<UserSettings>(JSONres);
         }
-        
+
     }
 }
