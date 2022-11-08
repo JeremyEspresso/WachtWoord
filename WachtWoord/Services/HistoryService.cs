@@ -10,7 +10,13 @@ namespace WachtWoord.Models.Services
         
         public async void AddHistory(string password, Entry entry)
         {
-            throw new NotImplementedException;
+            entry.history.Add(new History
+            {
+                Password = password,
+                DateChanged = DateTime.Now
+            });
+            _db.Update(entry);
+            await _db.SaveChangesAsync();
         }
 
         public async void DeleteHistory(History history)
@@ -29,8 +35,5 @@ namespace WachtWoord.Models.Services
         {
             return await _db.History.ToListAsync();
         }
-
-        
-
     }
 }
