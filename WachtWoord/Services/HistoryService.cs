@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WachtWoord.Models;
 using WachtWoord.Models.Interfaces;
 using WachtWoord.SQLite;
 
-namespace WachtWoord.Models.Services
+namespace WachtWoord.Services
 {
-    public class HistoryService
+    public class HistoryService : IHistoryService
     {
         private readonly Database _db = new();
         
@@ -34,6 +35,11 @@ namespace WachtWoord.Models.Services
         public async Task<List<History>> GetHistories()
         {
             return await _db.History.ToListAsync();
+        }
+
+        public Task<List<History>> GetEntryHistory(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
