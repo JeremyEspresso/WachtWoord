@@ -1,4 +1,6 @@
-﻿namespace WachtWoord.Models.Interfaces
+﻿using WachtWoord.Models;
+
+namespace WachtWoord.Services.Interfaces
 {
     interface IEntryService
     {
