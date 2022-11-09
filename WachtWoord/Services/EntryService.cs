@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WachtWoord.BLL;
-using WachtWoord.Models.Interfaces;
+using WachtWoord.Models;
+using WachtWoord.Services.Interfaces;
 using WachtWoord.SQLite;
 using Zxcvbn;
 
-namespace WachtWoord.Models.Services
+namespace WachtWoord.Services
 {
     public class EntryService : IEntryService
     {
