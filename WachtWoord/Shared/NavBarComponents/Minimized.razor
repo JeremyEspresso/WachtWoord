@@ -15,6 +15,20 @@
                     </span>
                 </a>
             </li>
+            <li title="Archive" class="transition ease-in-out duration-400 @(string.Equals(Active, "archive", StringComparison.OrdinalIgnoreCase) ? "text-violet-500" : "text-zinc-100 hover:text-amber-400")">
+                <a href="/Archive">
+                    <span>
+                        <i class="fa-solid fa-archive fa-lg mb-2"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="transition ease-in-out duration-400 @(string.Equals(Active, "newentry", StringComparison.OrdinalIgnoreCase) ? "text-violet-500" : "text-zinc-100 hover:text-amber-400")">
+                <a href="/newentry">
+                    <span>
+                        <i class="fa-solid fa-plus fa-lg mb-2"></i>
+                    </span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
