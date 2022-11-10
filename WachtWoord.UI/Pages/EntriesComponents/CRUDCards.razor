@@ -1,0 +1,100 @@
+﻿@inject NavigationManager navigationManager
+
+
+<div class="flex flex-wrap w-full text-center mb-2">
+    <div class="w-28" @onclick="OnCreateClick">
+        <div class="bg-neutral-700 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-neutral-600">
+            <div class="flex flex-col">
+                <span class="text-lg font-semibold text-zinc-100">
+                    Create
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-28" @onclick="OnUpdateClick">
+        <div class="bg-neutral-700/80 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-neutral-600/80">
+            <div class="flex flex-col">
+                <span class="text-lg font-semibold text-zinc-100">Edit</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-28" @onclick="OnCopyClick">
+        <div class="bg-neutral-700/60 rounded-lg p-2 mr-2 mt-2 h-10 cursor-pointer hover:bg-neutral-600/60">
+            <div class="flex flex-col">
+                <span class="text-lg font-semibold text-zinc-100">Copy</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@if (displayErrorMsg && selectedEntry == null)
+{
+    <div>
+        <span class="text-red-500">@errorMsg</span>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Entry? selectedEntry { get; set; }
+    private bool displayErrorMsg { get; set; }
+    private string errorMsg { get; set; }
+    private bool displayDeleteModal { get; set; }
+
+    protected override void OnInitialized()
+    {
+        displayErrorMsg = false;
+        errorMsg = "Please select an entry first.";
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (selectedEntry != null)
+        {
+            displayErrorMsg = false;
+        }
+    }
+
+    bool isSelectedNull()
+    {
+        var result = selectedEntry == null;
+        if (result)
+        {
+            displayErrorMsg = true;
+        }
+        return result;
+    }
+
+    void OnCreateClick()
+    {
+        navigationManager.NavigateTo("/NewEntry");
+    }
+
+    void OnUpdateClick()
+    {
+        if (!isSelectedNull())
+        {
+            navigationManager.NavigateTo("/edit/" + selectedEntry.Id);
+        }
+        else
+        {
+            displayErrorMsg = true;
+        }
+    }
+    
+    async Task OnCopyClick()
+    {
+        if (!isSelectedNull())
+        {
+            await Clipboard.SetTextAsync(selectedEntry.Password);
+        }
+        else
+        {
+            displayErrorMsg = true;
+        }
+    }
+}

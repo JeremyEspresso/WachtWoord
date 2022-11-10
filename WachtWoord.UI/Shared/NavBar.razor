@@ -1,0 +1,42 @@
+﻿@using WachtWoord.UI.Shared.NavBarComponents
+@inject NavigationManager navigationManager
+
+<div class="bg-neutral-700/30">
+    <span style="z-index: 1;" class="absolute left-2.5 top-2 text-zinc-100 hover:cursor-pointer hover:text-amber-500" title="Minimize" @onclick="ToggleExpanded">
+        <i class="fa-solid fa-bars fa-xl"></i>
+    </span>
+    @if (Expanded)
+    {
+        <Expanded Active="@Active" />
+    }
+    else
+    {
+        <Minimized Active="@Active" />
+        
+    }
+</div>
+
+
+
+
+@code {
+    public string Active { get; set; }
+    public bool Expanded { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        navigationManager.LocationChanged += LocationChanged;
+        Active = navigationManager.Uri.Split("/").Last();
+    }
+
+    void LocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        Active = e.Location.Split("/").Last();
+        StateHasChanged();
+    }
+
+    public void ToggleExpanded()
+    {
+        Expanded = !Expanded;
+    }
+}

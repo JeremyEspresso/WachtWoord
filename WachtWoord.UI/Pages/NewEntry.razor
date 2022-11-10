@@ -1,0 +1,80 @@
+﻿@page "/newentry"
+@using WachtWoord.Logic.Abstractions
+@using WachtWoord.Logic.Services
+@inject NavigationManager NavigationManager
+
+
+<div class=" w-full">
+    <div disabled=@IsLoading class="@(IsLoading ? "cursor-wait" : "") grid h-screen place-items-center">
+        <div class="items-center w-1/3">
+            <EditForm EditContext="@editContext" class="bg-neutral-700 shadow-md rounded-md px-8 pt-6 pb-8 mb-4" OnSubmit="@HandleSubmit">
+                <div class="mb-4">
+                    <h1 class="text-xl font-bold text-zinc-50 mb-2">New Password</h1>
+                    <label class="block text-zinc-100 text-sm font-semibold mb-2" for="title">
+                        Title <span class="text-zinc-400 text-sm font-normal"> * </span>
+                    </label>
+                    <input required @bind-value="entry.Title" class="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text">
+
+                    <label class="block text-zinc-100 text-sm font-semibold mb-2" for="username">
+                        Username <span class="text-zinc-400 text-sm font-light italic"> (opt.) </span>
+                    </label>
+                    <input @bind-value="entry.Username" class="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text">
+
+                    <label class="block text-zinc-100 text-sm font-semibold mb-2" for="Url">
+                        URL <span class="text-zinc-400 text-sm font-light italic"> (opt.) </span>
+                    </label>
+                    <input @bind-value="entry.URL" class="shadow appearance-none border rounded w-full py-2 px-3 text-zinc-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="url" type="text">
+
+                    <label class="block text-zinc-100 text-sm font-semibold mb-2" for="Url">
+                        Password Length <span class="text-zinc-400 text-sm font-normal"> * </span>
+                    </label>
+                    <input style="" @bind-value="entry.Length" min="16" max="128" class="mb-0 shadow appearance-none border rounded w-full py-2 px-3 text-zinc-800 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="length" type="number">
+                    <span class="text-xs text-zinc-400">Range between 16 and 128</span>
+                </div>
+                <button type="submit" class="@(IsLoading ? "cursor-wait" : "") w-full bg-indigo-500 hover:bg-indigo-400 text-zinc-50 focus:outline-indigo-700 font-semibold uppercase py-2 px-4 rounded focus:shadow-outline">
+                    @if (IsLoading)
+                    {
+                        <span>Generating Password</span>
+                    } else {
+                        <span>Create new entry</span>
+                    }
+                </button>
+            </EditForm>
+        </div>
+    </div>
+</div>       
+
+@code {
+    private Entry entry = new Entry() { Length = 32 };
+    private readonly IEntryService _EntryService = new EntryService();
+    private EditContext? editContext;
+    private bool IsLoading = false;
+
+    protected override void OnInitialized()
+    {
+        editContext = new(entry);
+
+    }
+
+    private async void HandleSubmit()
+    {
+        if (IsLoading) return;
+
+        IsLoading = true;
+        StateHasChanged();
+        await Task.Delay(1);
+
+        try
+        {
+            if (editContext != null && editContext.Validate())
+            {
+                await _EntryService.AddEntry(entry);
+                NavigationManager.NavigateTo("/dashboard");
+            }
+        } finally{
+            IsLoading = false;
+        }
+    }
+}
+
+

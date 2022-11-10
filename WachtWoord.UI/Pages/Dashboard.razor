@@ -1,0 +1,27 @@
+﻿@using WachtWoord.Logic.Abstractions
+@using WachtWoord.Logic.Services
+@using WachtWoord.UI.Pages.DashboardComponents
+@page "/dashboard"
+
+<div>
+    <InformationCards avgStrength="@avgStrength" totalPasswords="@totalPasswords"/>
+    <Favorites favoritesList="@favoritesList"/>
+    <Recent recentList="@recentList"/>
+</div>
+
+@code {
+    private readonly IEntryService _entryService = new EntryService();
+    public List<Entry> favoritesList { get; set; }
+    public List<Entry> recentList { get; set; }
+    public double avgStrength { get; set; }
+    public int totalPasswords { get; set; }
+    
+    protected override void OnInitialized()
+    {
+        var AllEntries = _entryService.GetAllEntries();
+        recentList = AllEntries.OrderByDescending(x => x.CreationDate).Take(5).ToList();
+        totalPasswords = AllEntries.Count;
+        avgStrength = _entryService.GetAverageStrength();
+        favoritesList = _entryService.GetFavorites();
+    }
+}

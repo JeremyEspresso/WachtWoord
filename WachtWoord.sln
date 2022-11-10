@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WachtWoord.Logic", "WachtWo
 		{9A5496E4-887F-473A-943F-31DDC88FAEAE} = {9A5496E4-887F-473A-943F-31DDC88FAEAE}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WachtWoord.UI", "WachtWoord.UI\WachtWoord.UI.csproj", "{924AB424-C966-4EC3-8036-C0D1BC83B87C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,12 @@ Global
 		{A2BAD19C-9F0E-46AD-98BB-7C39015DE094}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2BAD19C-9F0E-46AD-98BB-7C39015DE094}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2BAD19C-9F0E-46AD-98BB-7C39015DE094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{924AB424-C966-4EC3-8036-C0D1BC83B87C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{924AB424-C966-4EC3-8036-C0D1BC83B87C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{924AB424-C966-4EC3-8036-C0D1BC83B87C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{924AB424-C966-4EC3-8036-C0D1BC83B87C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{924AB424-C966-4EC3-8036-C0D1BC83B87C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{924AB424-C966-4EC3-8036-C0D1BC83B87C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

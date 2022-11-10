@@ -1,0 +1,16 @@
+﻿@if (favoritesList.Any())
+{
+    @foreach (Entry entry in favoritesList)
+    {
+        <FavoriteCard entry="@entry"/>
+    }
+}
+else
+{
+    <span class="ml-2 text-gray-500 text-md">No entries marked as favorite </span>
+}
+
+@code {
+    [Parameter]
+    public List<Entry> favoritesList { get; set; }
+}

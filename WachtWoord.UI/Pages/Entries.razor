@@ -1,0 +1,63 @@
+﻿@page "/entries"
+@using WachtWoord.Logic.Abstractions
+@using WachtWoord.Logic.Services
+@using WachtWoord.UI.Pages.EntriesComponents
+<div class="overflow-hidden h-screen ml-2 mr-2">
+    <CRUDCards selectedEntry="selectedEntry"/>
+    <FilterOptions OnSearchChange="SearchQueryUpdate"/>
+    <CascadingValue Value="this">
+        <EntryTable/>
+    </CascadingValue>
+    
+</div>
+
+@code {
+    public List<Entry> allEntries = new List<Entry>();
+    private readonly IEntryService _entryService = new EntryService();
+    public Entry? selectedEntry { get; set; }
+    public string searchQuery { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        allEntries = _entryService.GetAllEntries();
+    }
+
+    void SearchQueryUpdate(string query)
+    {
+        allEntries = _entryService.GetAllEntries();
+        switch (query)
+        {
+            case "All":
+                allEntries = _entryService.GetAllEntries();
+                    break;
+            case "Favorites":
+                allEntries = _entryService.GetFavorites();
+                break;
+            default:
+                if (!string.IsNullOrEmpty(query))
+                {
+                    allEntries = allEntries.Where(e => e.Title.ToLower().Contains(query.ToLower())).ToList();
+                }
+                break;
+        }
+
+    }
+
+    public void SelectedEntryUpdate(Entry entry)
+    {
+        if (entry == selectedEntry)
+        {
+            selectedEntry = null;
+        }
+        else
+        {
+            selectedEntry = entry;
+        }
+        StateHasChanged();
+    }
+
+    public async void MarkAsFavorite(Entry entry)
+    {
+        await _entryService.FavoriteEntry(entry);
+    }
+}

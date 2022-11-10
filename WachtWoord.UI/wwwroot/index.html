@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en" onmouseup="preventMouseupDefault()">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WinFormsBlazor</title>
+    <base href="/" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="WachtWoord.styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/fa/fontawesome.min.css" />
+</head>
+
+<body>
+
+    <div id="app">
+
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="_framework/blazor.webview.js"></script>
+
+    <script>
+        function preventMouseupDefault() {
+            window.addEventListener('mouseup', (e) => {
+                e.preventDefault();
+            })
+        };
+    </script>
+    <script src="js/fa/all.min.js"></script>
+
+</body>
+
+</html>

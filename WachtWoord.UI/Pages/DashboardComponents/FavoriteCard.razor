@@ -1,0 +1,35 @@
+﻿<div class="max-w-fit m-2 font-semibold drop-shadow-md rounded-lg bg-neutral-700/50 p-2 hover:bg-neutral- hover:scale-105">
+    <div class="flex flex-col whitespace-nowrap">
+        <div class="uppercase text-md font-bold border-b border-neutral-600/50 tracking-tight inline-block align-baseline">
+            <span class="float-left mr-1 text-amber-500">@entry.Title</span>
+            <span @onclick="OnCopyClick" title="Copy password" class="hover:cursor-pointer">
+                <i class="float-right ml-1 mr-2 fa-regular fa-copy text-zinc-200 mt-1"></i>
+            </span>
+        </div>
+        <div class="text-zinc-100 font-normal">
+            @if (string.IsNullOrEmpty(entry.Username))
+            {
+                <span class="text-sm italic">
+                    Username not set
+                </span>
+            }
+            else
+            {
+                <span class="text-sm">
+                    @entry.Username
+                </span>
+            }
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public Entry entry { get; set; }
+    
+    async Task OnCopyClick()
+    {
+        await Clipboard.SetTextAsync(entry.Password);
+    }
+}
