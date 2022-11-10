@@ -3,6 +3,8 @@
 @using WachtWoord.Logic.Abstractions
 @using WachtWoord.Logic.Services
 
+@inject IEntryService _entryService;
+@inject IHistoryService _historyService;
 @inject NavigationManager NavigationManager
 
 
@@ -70,8 +72,6 @@
     [Parameter]
     public int Id { get; set; }
     public Entry entry { get; set; }
-    private readonly IEntryService _entryService = new EntryService();
-    private readonly IHistoryService _historyService = new HistoryService();
     private EditContext? editContext;
     private bool IsLoading = false;
     private bool ShowPassword = false;

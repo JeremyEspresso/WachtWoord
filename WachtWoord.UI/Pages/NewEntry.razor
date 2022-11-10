@@ -1,6 +1,6 @@
 ﻿@page "/newentry"
 @using WachtWoord.Logic.Abstractions
-@using WachtWoord.Logic.Services
+@inject IEntryService _EntryService;
 @inject NavigationManager NavigationManager
 
 
@@ -46,7 +46,6 @@
 
 @code {
     private Entry entry = new Entry() { Length = 32 };
-    private readonly IEntryService _EntryService = new EntryService();
     private EditContext? editContext;
     private bool IsLoading = false;
 

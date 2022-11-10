@@ -2,6 +2,7 @@
 @using WachtWoord.Logic.Services
 @using WachtWoord.UI.Pages.DashboardComponents
 @page "/dashboard"
+@inject IEntryService _entryService;
 
 <div>
     <InformationCards avgStrength="@avgStrength" totalPasswords="@totalPasswords"/>
@@ -10,7 +11,6 @@
 </div>
 
 @code {
-    private readonly IEntryService _entryService = new EntryService();
     public List<Entry> favoritesList { get; set; }
     public List<Entry> recentList { get; set; }
     public double avgStrength { get; set; }

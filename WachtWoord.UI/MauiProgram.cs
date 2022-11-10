@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using WachtWoord.Data;
+using WachtWoord.Logic.Abstractions;
+using WachtWoord.Logic.Services;
 
 namespace WachtWoord;
 
@@ -22,8 +23,9 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		builder.Services.AddSingleton<WeatherForecastService>();
+		builder.Services.AddSingleton<IEntryService, EntryService>();
+		builder.Services.AddSingleton<IHistoryService, HistoryService>();
 
-		return builder.Build();
+        return builder.Build();
 	}
 }

@@ -1,7 +1,8 @@
 ﻿@page "/entries"
 @using WachtWoord.Logic.Abstractions
-@using WachtWoord.Logic.Services
 @using WachtWoord.UI.Pages.EntriesComponents
+@inject IEntryService _entryService;
+
 <div class="overflow-hidden h-screen ml-2 mr-2">
     <CRUDCards selectedEntry="selectedEntry"/>
     <FilterOptions OnSearchChange="SearchQueryUpdate"/>
@@ -13,7 +14,6 @@
 
 @code {
     public List<Entry> allEntries = new List<Entry>();
-    private readonly IEntryService _entryService = new EntryService();
     public Entry? selectedEntry { get; set; }
     public string searchQuery { get; set; } = "";
 
