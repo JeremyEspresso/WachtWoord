@@ -1,6 +1,8 @@
 ﻿@page "/Edit/{Id:int}"
-@using WachtWoord.BLL
-@using WachtWoord.Services
+@using WachtWoord.Logic.PasswordGenerator
+@using WachtWoord.Logic.Abstractions
+@using WachtWoord.Logic.Services
+
 @inject NavigationManager NavigationManager
 
 
@@ -68,8 +70,8 @@
     [Parameter]
     public int Id { get; set; }
     public Entry entry { get; set; }
-    private readonly EntryService _entryService = new();
-    private readonly HistoryService _historyService = new();
+    private readonly IEntryService _entryService = new EntryService();
+    private readonly IHistoryService _historyService = new HistoryService();
     private EditContext? editContext;
     private bool IsLoading = false;
     private bool ShowPassword = false;
@@ -94,7 +96,7 @@
             {
                 //_historyService.AddHistory(entry.Password, entry);
                 if (ChangedPassword) _historyService.AddHistory(entry.Password, entry);
-                _entryService.UpdateEntry(Id, entry);
+                await _entryService.UpdateEntry(Id, entry);
                 NavigationManager.NavigateTo("/Entries");
             }
         }
@@ -106,15 +108,15 @@
 
     private void OnChangePasswordClick()
     {
-        PasswordGenerator passwordGenerator = new(entry.Password.Length);
+        PWGenerator passwordGenerator = new(entry.Password.Length);
         entry.Password = passwordGenerator.GeneratePassword();
         ChangedPassword = true;
         StateHasChanged();
     }
     
-    private void OnDeleteEntryClick()
+    private async void OnDeleteEntryClick()
     {
-        _entryService.DeleteEntry(entry.Id);
+        await _entryService.DeleteEntry(entry.Id);
         NavigationManager.NavigateTo("/Entries");
     }
 }

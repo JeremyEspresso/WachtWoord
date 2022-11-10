@@ -1,6 +1,6 @@
 ﻿@page "/newentry"
-@using WachtWoord.BLL
-@using WachtWoord.Services
+@using WachtWoord.Logic.Abstractions
+@using WachtWoord.Logic.Services
 @inject NavigationManager NavigationManager
 
 
@@ -46,7 +46,7 @@
 
 @code {
     private Entry entry = new Entry() { Length = 32 };
-    private readonly EntryService _EntryService = new();
+    private readonly IEntryService _EntryService = new EntryService();
     private EditContext? editContext;
     private bool IsLoading = false;
 
@@ -68,7 +68,7 @@
         {
             if (editContext != null && editContext.Validate())
             {
-                _EntryService.AddEntry(entry);
+                await _EntryService.AddEntry(entry);
                 NavigationManager.NavigateTo("/dashboard");
             }
         } finally{

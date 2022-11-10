@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WachtWoord.BLL;
-using WachtWoord.Models;
-using WachtWoord.Services.Interfaces;
-using WachtWoord.SQLite;
+using WachtWoord.Database;
+using WachtWoord.Domain.Models;
+using WachtWoord.Logic.Abstractions;
+using WachtWoord.Logic.PasswordGenerator;
 using Zxcvbn;
 
-namespace WachtWoord.Services
+namespace WachtWoord.Logic.Services
 {
     public class EntryService : IEntryService
     {
-        private readonly Database _db = new();
+        private readonly Context _db = new();
 
-        public async void AddEntry(Entry entry)
+        public async Task AddEntry(Entry entry)
         {
-            PasswordGenerator PwGenerator = new(entry.Length);
+            IPasswordGenerator PwGenerator = new PWGenerator(entry.Length);
             entry.Password = PwGenerator.GeneratePassword();
-            entry.Strength = (Core.EvaluatePassword(entry.Password).Score * 20) + 20;
+            entry.Strength = Core.EvaluatePassword(entry.Password).Score * 20 + 20;
             entry.CreationDate = DateTime.Now;
             if (!string.IsNullOrEmpty(entry.URL))
             {
@@ -28,7 +28,7 @@ namespace WachtWoord.Services
             await _db.SaveChangesAsync();
         }
 
-        public async void DeleteEntry(int Id)
+        public async Task DeleteEntry(int Id)
         {
             var entryToDelete = _db.Entries.Include(e => e.history).FirstOrDefault(e => e.Id == Id);
             if (entryToDelete == null) return;
@@ -40,7 +40,7 @@ namespace WachtWoord.Services
 
         public async Task<Entry?> GetEntry(int id) => await _db.Entries.FindAsync(id);
 
-        public async void UpdateEntry(int Id, Entry entry)
+        public async Task UpdateEntry(int Id, Entry entry)
         {
             var result = _db.Entries.Find(Id);
             if (result != null)
@@ -64,11 +64,11 @@ namespace WachtWoord.Services
 
         public int GetEntryCount() => _db.Entries.Count();
 
-        public double GetAverageStrength() => ((_db.Entries.Any()) ? _db.Entries.Average(e => e.Strength) : 0);
+        public double GetAverageStrength() => _db.Entries.Any() ? _db.Entries.Average(e => e.Strength) : 0;
 
         public List<Entry> GetFavorites() => _db.Entries.Where(e => e.IsFavorite).ToList();
 
-        public async void FavoriteEntry(Entry entry)
+        public async Task FavoriteEntry(Entry entry)
         {
             entry.IsFavorite = !entry.IsFavorite;
             _db.Entries.Update(entry);

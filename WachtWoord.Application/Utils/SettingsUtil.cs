@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
-using WachtWoord.Models;
+using WachtWoord.Domain.Models;
 
-namespace WachtWoord.BLL
+namespace WachtWoord.Logic.Utils
 {
-    public static class Settings
+    public static class SettingsUtil
     {
         public static readonly string path = Environment.CurrentDirectory + "settings.json";
         public static void Create()

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WachtWoord.Models
+namespace WachtWoord.Domain.Models
 {
     public class Entry
     {

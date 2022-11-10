@@ -1,4 +1,4 @@
-﻿namespace WachtWoord.BLL
+﻿namespace WachtWoord.Logic.Abstractions
 {
     internal interface IPasswordGenerator
     {

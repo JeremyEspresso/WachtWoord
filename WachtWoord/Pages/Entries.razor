@@ -1,6 +1,7 @@
 ﻿@page "/entries"
-@using WachtWoord.Services
-@using WachtWoord.Pages.EntriesComponents
+@using WachtWoord.Logic.Abstractions
+@using WachtWoord.Logic.Services
+@using WachtWoord.UI.Pages.EntriesComponents
 <div class="overflow-hidden h-screen ml-2 mr-2">
     <CRUDCards selectedEntry="selectedEntry"/>
     <FilterOptions OnSearchChange="SearchQueryUpdate"/>
@@ -12,7 +13,7 @@
 
 @code {
     public List<Entry> allEntries = new List<Entry>();
-    private readonly EntryService _entryService = new();
+    private readonly IEntryService _entryService = new EntryService();
     public Entry? selectedEntry { get; set; }
     public string searchQuery { get; set; } = "";
 
@@ -55,8 +56,8 @@
         StateHasChanged();
     }
 
-    public void MarkAsFavorite(Entry entry)
+    public async void MarkAsFavorite(Entry entry)
     {
-        _entryService.FavoriteEntry(entry);
+        await _entryService.FavoriteEntry(entry);
     }
 }

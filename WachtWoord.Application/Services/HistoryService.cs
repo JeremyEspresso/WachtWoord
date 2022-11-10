@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WachtWoord.Models;
-using WachtWoord.Models.Interfaces;
-using WachtWoord.SQLite;
+using WachtWoord.Database;
+using WachtWoord.Domain.Models;
+using WachtWoord.Logic.Abstractions;
 
-namespace WachtWoord.Services
+namespace WachtWoord.Logic.Services
 {
     public class HistoryService : IHistoryService
     {
-        private readonly Database _db = new();
-        
+        private readonly Context _db = new();
+
         public async void AddHistory(string password, Entry entry)
         {
             entry.history.Add(new History
