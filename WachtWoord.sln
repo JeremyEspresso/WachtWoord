@@ -3,9 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WachtWoord", "WachtWoord\WachtWoord.csproj", "{8D55BA32-2908-4367-895C-F2DC15FEFC3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WachtWoord.UI", "WachtWoord\WachtWoord.UI.csproj", "{8D55BA32-2908-4367-895C-F2DC15FEFC3F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A2BAD19C-9F0E-46AD-98BB-7C39015DE094} = {A2BAD19C-9F0E-46AD-98BB-7C39015DE094}
+		{BDA83C95-5141-4ACE-9510-29E29E679657} = {BDA83C95-5141-4ACE-9510-29E29E679657}
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{72522B6F-3E34-4835-817E-148392A93AD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WachtWoord.Domain", "WachtWoord.Domain\WachtWoord.Domain.csproj", "{BDA83C95-5141-4ACE-9510-29E29E679657}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WachtWoord.Database", "WachtWoord.Database\WachtWoord.Database.csproj", "{9A5496E4-887F-473A-943F-31DDC88FAEAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WachtWoord.Logic", "WachtWoord.Application\WachtWoord.Logic.csproj", "{A2BAD19C-9F0E-46AD-98BB-7C39015DE094}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A5496E4-887F-473A-943F-31DDC88FAEAE} = {9A5496E4-887F-473A-943F-31DDC88FAEAE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +28,18 @@ Global
 		{8D55BA32-2908-4367-895C-F2DC15FEFC3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D55BA32-2908-4367-895C-F2DC15FEFC3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D55BA32-2908-4367-895C-F2DC15FEFC3F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{72522B6F-3E34-4835-817E-148392A93AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72522B6F-3E34-4835-817E-148392A93AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72522B6F-3E34-4835-817E-148392A93AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{72522B6F-3E34-4835-817E-148392A93AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDA83C95-5141-4ACE-9510-29E29E679657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDA83C95-5141-4ACE-9510-29E29E679657}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDA83C95-5141-4ACE-9510-29E29E679657}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDA83C95-5141-4ACE-9510-29E29E679657}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5496E4-887F-473A-943F-31DDC88FAEAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5496E4-887F-473A-943F-31DDC88FAEAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5496E4-887F-473A-943F-31DDC88FAEAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5496E4-887F-473A-943F-31DDC88FAEAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BAD19C-9F0E-46AD-98BB-7C39015DE094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BAD19C-9F0E-46AD-98BB-7C39015DE094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BAD19C-9F0E-46AD-98BB-7C39015DE094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BAD19C-9F0E-46AD-98BB-7C39015DE094}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

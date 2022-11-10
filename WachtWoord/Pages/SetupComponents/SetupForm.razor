@@ -1,4 +1,4 @@
-﻿@using WachtWoord.Services
+﻿@using WachtWoord.Logic.Utils
 @inject NavigationManager NavigationManager
 
 <div class="w-full">
@@ -40,10 +40,10 @@
     private string Password = String.Empty;
     private string RepeatPassword = String.Empty;
     private bool PasswordsMatch = true;
-
+    
     protected override void OnInitialized()
     {
-        if (DatabaseService.Exists())
+        if (ContextUtil.Exists())
         {
             NavigationManager.NavigateTo("/login");
         }
@@ -53,7 +53,7 @@
     {
         if (Password == RepeatPassword)
         {
-            if (DatabaseService.Create(Password))
+            if (ContextUtil.Create(Password))
             {
                 NavigationManager.NavigateTo("/login");
             }

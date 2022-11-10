@@ -1,5 +1,6 @@
-﻿@using WachtWoord.Services
-@using WachtWoord.Pages.DashboardComponents
+﻿@using WachtWoord.Logic.Abstractions
+@using WachtWoord.Logic.Services
+@using WachtWoord.UI.Pages.DashboardComponents
 @page "/dashboard"
 
 <div>
@@ -9,7 +10,7 @@
 </div>
 
 @code {
-    private readonly EntryService _entryService = new();
+    private readonly IEntryService _entryService = new EntryService();
     public List<Entry> favoritesList { get; set; }
     public List<Entry> recentList { get; set; }
     public double avgStrength { get; set; }

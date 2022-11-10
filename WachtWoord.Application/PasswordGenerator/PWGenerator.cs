@@ -1,23 +1,24 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using WachtWoord.Models;
+using WachtWoord.Domain.Models;
+using WachtWoord.Logic.Abstractions;
 
-namespace WachtWoord.BLL
+namespace WachtWoord.Logic.PasswordGenerator
 {
-    public class PasswordGenerator : IPasswordGenerator
+    public class PWGenerator : IPasswordGenerator
     {
         UserSettings UserSettings { get; set; }
         private int Length { get; set; }
-        public PasswordGenerator(int length, UserSettings userSettings)
+        public PWGenerator(int length, UserSettings userSettings)
         {
             UserSettings = userSettings;
-            this.Length = length;
+            Length = length;
         }
 
-        public PasswordGenerator(int length)
+        public PWGenerator(int length)
         {
             UserSettings = new UserSettings();
-            this.Length = length;
+            Length = length;
         }
         // <summary>
         // Function checks the password generator requirements set by the user
@@ -37,7 +38,7 @@ namespace WachtWoord.BLL
             //Fisher-Yates shuffle
             Random random = new();
             int n = chars.Length;
-            for (int i = 0; i < (n - 1); i++)
+            for (int i = 0; i < n - 1; i++)
             {
                 int r = i + random.Next(n - i);
                 (chars[i], chars[r]) = (chars[r], chars[i]);
@@ -61,7 +62,7 @@ namespace WachtWoord.BLL
             {
                 next = RandomNumberGenerator.GetInt32(0, chars.Length - 1);
                 while (next == prev) next = RandomNumberGenerator.GetInt32(0, chars.Length - 1);
-                password.Append(chars[next % (chars.Length)]);
+                password.Append(chars[next % chars.Length]);
                 prev = next;
 
             }

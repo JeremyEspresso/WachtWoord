@@ -1,13 +1,11 @@
-﻿
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
-using WachtWoord.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using WachtWoord.Domain.Models;
 
-namespace WachtWoord.SQLite
+namespace WachtWoord.Database
 {
-    public class Database : DbContext
+    public class Context : DbContext
     {
         public const string DEFAULTDBFILE = "WachtWoord.db";
         public DbSet<Entry> Entries { get; set; }
@@ -16,9 +14,9 @@ namespace WachtWoord.SQLite
         public static string DbPwd { get; set; }
         private SqliteConnection connection;
 
-        public Database() { }
+        public Context() { }
 
-        public Database(string databasePassword)
+        public Context(string databasePassword)
         {
             DbPwd = databasePassword;
         }

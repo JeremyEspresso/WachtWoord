@@ -5,7 +5,7 @@
  * </summary>
  */
 
-namespace WachtWoord.Models
+namespace WachtWoord.Domain.Models
 {
     public class UserSettings
     {

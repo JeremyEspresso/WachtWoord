@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WachtWoord.SQLite;
+using WachtWoord.Database;
 
-namespace WachtWoord.Services
+namespace WachtWoord.Logic.Services
 {
     public class DatabaseService
     {
 
         public static bool Exists()
         {
-            return File.Exists(Database.DEFAULTDBFILE);
+            return File.Exists(Context.DEFAULTDBFILE);
         }
         /*
          * <summary>
@@ -22,7 +22,7 @@ namespace WachtWoord.Services
         {
             try
             {
-                using Database db = new(password);
+                using Context db = new(password);
                 db.Database.EnsureCreated();
                 return true;
             }
@@ -42,7 +42,7 @@ namespace WachtWoord.Services
          */
         public static bool Create(string password)
         {
-            Database db = new(password);
+            Context db = new(password);
             return db.Database.EnsureCreated();
         }
 
@@ -56,7 +56,7 @@ namespace WachtWoord.Services
          */
         public static void ChangePassword(string newPassword)
         {
-            Database db = new();
+            Context db = new();
             var query = @"PRAGMA rekey = '" + newPassword + "';";
             db.Database.ExecuteSqlRaw(query);
         }
