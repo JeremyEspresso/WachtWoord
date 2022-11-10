@@ -1,6 +1,6 @@
-﻿namespace WachtWoord.Services.Interfaces
+﻿namespace WachtWoord.Logic.Abstractions
 {
-    public interface IDatabaseService
+    public interface IContextUtil
     {
         bool Exists();
         bool Login(string password);
