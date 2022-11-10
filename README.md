@@ -24,4 +24,4 @@ A list of all your entries
 <li>Allow users to encrypt database file with their own keys</li>
 <li>Add fingerprint recognition for login</li>
 <li>Improve user experience by changing various elements</li>
-
+<li>Multi threading</li>
